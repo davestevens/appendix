@@ -1,0 +1,3129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="ds_thesis.css">
+    <title>On the Automated compilation of UML notation to a VLIW Chip Mulitprocessor</title>
+  </head>
+
+  <body>
+    <div class="maketitle">
+      <h2 class="titleHead">On the Automated compilation of UML notation to a VLIW Chip Mulitprocessor</h2>
+      <div class="author">
+	<span class="cmr-12">by</span>
+	<br />
+	<span class="cmr-12">David Stevens</span>
+	<br />
+	<br />
+	<span class="cmbx-12">A Doctoral Thesis</span>
+	<br />
+	<br />
+	<span class="cmr-12">Submitted in partial fulfilment of the requirements for the award of</span>
+	<br />
+        <span class="cmr-12">Doctor of Philosophy of Loughborough University</span>
+	<br />
+	<br />
+        <span class="cmsy-10x-x-120">© </span>
+	<span class="cmr-12">David Stevens 2012</span>
+	<br />
+	<br />
+        <span class="cmr-12">December 2012 </span>
+      </div>
+    </div>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix A
+      </span>
+      <br />
+      Modelling Modification Implementations
+    </h2>
+    Methods presented in Chapter 4 which are implemented in Perl are included;
+
+    <h3 class="sectionHead">
+      <span class="titlemark">A.1</span>
+      Modifiable Architecture
+    </h3>
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/Modelling/blob/master/arch.pl" target="_blank">
+      <span class="cmbx-10">arch.pl</span>
+      </a>
+      <br class="newline" />
+      Script to modify the Architecture section of the UML model in XMI format using the wildcard notation,
+      <span class="cmti-10">HwProcessor</span>
+      s are found and replicated.
+      <br class="newline" />
+      Requires an XMI file, LE1 XML file and output file name.
+      <br class="newline" />
+      Generates an XMI file with modified architecture section to match that which is defined in the LE1 XML file.
+    </p>
+
+    <h3 class="sectionHead">
+      <span class="titlemark">A.2</span>
+      Modifiable Application
+    </h3>
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/Modelling/blob/master/appl_rr.pl" target="_blank">
+      <span class="cmbx-10">appl</span>
+      <span class="cmbx-10">_rr.pl</span>
+      </a>
+      <br class="newline" />
+      Script to modify the Application section of the UML model in XMI format using the wildcard multiplicity notation. Objects within the top level class are replicated along with the creation of surrounding structure to communicate with input and output objects. This method includes a fork object which passes subsequent calls to available replicated objects in a round robin manor and a join object which passes calls from multiple objects to a single output port.
+      <br class="newline" />
+      Requires an XMI file, name of top level class and output file name.
+      <br class="newline" />
+      Generates an XMI file with extended application section.
+    </p>
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/Modelling/blob/master/appl_split.pl" target="_blank">
+      <span class="cmbx-10">appl</span>
+      <span class="cmbx-10">_split.pl</span>
+      </a>
+      <br class="newline" />
+      Script to modify the Application section of the UML model in XMI format using the wildcard multiplicity notation. Objects within the top level class are replicated along with the creation of surrounding structure to communicate with input and output objects. This method includes a fork object which splits a data section over all available replicated objects and a fork object which waits for all forked jobs to complete before passing data to output port.
+      <br class="newline" />
+      Requires an XMI file, name of top level class and output file name.
+      <br class="newline" />
+      Generates an XMI file with extended application section.
+    </p>
+
+    <h3 class="sectionHead">
+      <span class="titlemark">A.3</span>
+      Modifiable Allocations
+    </h3>
+    <p class="noindent" >
+      <a href"https://github.com/david-stevens/Modelling/blob/master/alloc.pl" target="_blank">
+      <span class="cmbx-10">alloc.pl</span>
+      </a>
+      <br class="newline" />
+      Script to calculate all possible static mappings based on the UML model input. Requires an XMI file, name of top level class, output file name and optionally a directory to generate images in. Generates an XML file containing permutations of all possible static mapping bases on the input UML model. Also generates an image associated with each mapping if required, this enables the viewing off generated static mappings.
+    </p>
+
+    <h3 class="sectionHead">
+      <span class="titlemark">A.4</span>
+      Create Static UML Model
+    </h3>
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/Modelling/blob/master/writeStatic.pl" target="_blank">
+      <span class="cmbx-10">writeStatic.pl</span>
+      </a>
+      <br class="newline" />
+      Script to generate a statically allocated UML model, using the XML output from the alloc.pl script and permutation number to generate it strips all allocations and UML dependencies and generates one of the static mappings defined in the XML file. Requires an XMI file, XML file and permutation to generate. Generates an XMI file containing the statically allocated UML model specified by the permutation number in the XML file.
+    </p>
+
+    <h3 class="sectionHead">
+      <span class="titlemark">A.5</span>
+      Miscellaneous
+    </h3>
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/Modelling/blob/master/global.pl" target="_blank">
+      <span class="cmbx-10">global.pl</span>
+      </a>
+      <br class="newline" />
+      Global functions to set MARTE tags dependent on the version used to export XMI, parse command line arguments and setup global variables.
+    </p>
+
+    <h3 class="sectionHead">
+      <a href="https://github.com/david-stevens/Modelling/archive/master.zip" target="_blank">
+	<p class="titlemark">Download .zip</p>
+      </a>
+      <a href="https://github.com/david-stevens/Modelling" target="_blank">
+	<p class="titlemark">View on github.com</p>
+      </a>
+    </h3>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix B
+      </span>
+      <br />
+      Full Flow Example
+    </h2>
+    UML to simulation on Insizzle, the LE1 Instruction
+    Set Simulator.
+
+    <h3 class="sectionHead">
+      <span class="titlemark">B.1</span>
+      UML Model
+    </h3>
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/FullFlow/blob/master/Sobel_roundrobin_wildcard.zip" target="_blank">Download Modelio UML model</a><br/>
+      Creation of UML model within Modelio using the UML design notations defined above.
+      Example is based on a Sobel Filter UML model. The Class diagram showing the overall
+      behaviour of the model is shown in Figure <a href="#x1-1180011">B.1</a> with the structure of the model shown in
+      Figure <a href="#x1-1180022">B.2</a>. The Class diagram display internal operations, attributes and ports of the classes
+      along with interfaces and their realisations contained within the model. The Composite
+      Structure diagram displays the structure of the system captured in the UML model,
+      Figure <a href="#x1-1180022">B.2</a> displays three objects within a single top level class along with their ports and
+      connections in the application section of the model. Also shown is the architecture
+      section and the mappings between the application and architecture sections. It is in this
+      diagram where the UML notations defined within this thesis are included with the &#8217;Sob&#8217;
+      object and &#8217;i1&#8217; <span class="cmti-10">HwProcessor </span>being tagged with a wildcard multiplicity as well as the
+      static and adjustable mappings between the application and architecture sections of the
+      model.
+    </p>
+    <p class="indent" >
+      <hr class="figure" />
+      <a id="x1-1180011"></a>
+      <div class="figure" >
+	<p class="noindent" >
+	  <img src="img/full_flow_class.png" alt="PIC">
+	  <br />
+	  <div class="caption">
+	    <span class="id">Figure B.1: </span>
+	    <span class="content">Class diagram of Sobel Filer UML model</span>
+	  </div>
+	</p>
+      </div>
+    </p>
+
+    <p class="indent" >
+      <a id="x1-1180022"></a>
+      <div class="figure">
+	<p class="noindent" >
+	  <img src="img/full_flow_comp.png" alt="PIC">
+	  <br />
+	  <div class="caption">
+	    <span class="id">Figure B.2: </span>
+	    <span class="content">Composite Structure of Sobel Filter UML model</span>
+	  </div>
+	</p>
+      </div>
+      <hr class="endfigure" />
+    </p>
+
+    <p class="indent" >
+      Classes within the UML model require state machines to define their overall behaviour, these
+      are shown in Figure&#x00A0;<a href="#x1-118003r1">B.3(a)</a>
+      and&#x00A0;<a href="#x1-118004r2">B.3(b)</a>.
+      The Source class state machine is shown in Figure&#x00A0;<a href="#x1-118003r1">B.3(a)</a>
+      where an initialisation operation is executed to put the class into a known state followed by an
+      operation to start passing data to the Sobel Filter class. These are linked to transitions within the
+      state machine with not triggers, resulting in them being executed once the class is instantiated as
+      an object within the application. Figure&#x00A0;<a href="#x1-118004r2">B.3(b)</a> shows the state machine associated with the
+      Sobel Filter class. This differs from the Source state machine in that initially the class
+      transitions to &#8217;State&#8217; and then waits for a trigger before taking a transition back to the
+      same state. This is used allow a continuous flow of information to be passed to the
+      object instantiated from the Sobel Filter class. Each time the transition is triggered an
+      internal operation is called with the passed data which is then computed within the
+      object.
+    </p>
+
+    <p class="indent" >
+      <hr class="figure">
+      <div class="figure">
+	<p class="noindent" >
+	  <a id="x1-118003r1"></a>
+	  <div class="subfigure">
+	    <table>
+	      <tr>
+		<td style="text-align:left">
+		  <img src="img/full_flow_source_state.png" alt="PIC">
+		  <div class="subfigcaption">
+		    <span class="cmr-8">(a)</span>
+		    <span class="cmr-8">State</span>
+		    <span class="cmr-8">machine</span>
+		    <span class="cmr-8">linked</span>
+		    <span class="cmr-8">to  the</span>
+		    <span class="cmr-8">Source</span>
+		    <span class="cmr-8">Class</span>
+		    <span class="cmr-8">within</span>
+		    <span class="cmr-8">the</span>
+		    <span class="cmr-8">UML</span>
+		    <span class="cmr-8">model.</span>
+		  </div>
+		</td>
+	      </tr>
+	    </table>
+	  </div>
+	  <a  id="x1-118004r2"></a>
+	  <div class="subfigure">
+	    <table>
+	      <tr>
+		<td style="text-align:left"> <img src="img/full_flow_sob_state.png" alt="PIC">
+		  <div class="subfigcaption">
+		    <span class="cmr-8">(b)</span>
+		    <span class="cmr-8">State</span>
+		    <span class="cmr-8">machine</span>
+		    <span class="cmr-8">linked</span>
+		    <span class="cmr-8">to  the</span>
+		    <span class="cmr-8">Sobel</span>
+		    <span class="cmr-8">Filter</span>
+		    <span class="cmr-8">Class</span>
+		    <span class="cmr-8">within</span>
+		    <span class="cmr-8">the</span>
+		    <span class="cmr-8">UML</span>
+		    <span class="cmr-8">model.</span>
+		  </div>
+		</td>
+	      </tr>
+	    </table>
+	  </div>
+	  <div class="caption">
+	    <span class="id">Figure&#x00A0;B.3: </span>
+	    <span class="content">State machines defining behaviour of Classes within the UML model used for
+	      full tool chain example.</span>
+	  </div>
+      </div>
+      <hr class="endfigure" />
+    </p>
+
+    <h3 class="sectionHead">
+      <span class="titlemark">B.2   </span>
+      UML Notation
+    </h3>
+
+    <p class="noindent" >
+      Running the exported XMI file through the scripts defined above.
+    </p>
+
+    <p class="indent" >
+      As seen in Figure&#x00A0;<a href="#x1-1180022">B.2</a> above the part within TOP named i1 which is typed as Sob
+      has a wildcard multiplicity, there is also an object typed as a HwProcessor within the
+      HwComputingResource which is tagged with a wildcard multiplicity. This results in a UML model
+      which can be modified to be executed on a base system with three or more cores. For
+      ease of displaying all possibilities a four core LE1 base system was used, this results
+      in 16 possible permutations of static mappings, these permutations are displayed in
+      Table&#x00A0;<a href="#x1-1190011">B.1</a>.
+    </p>
+
+    <div class="table">
+      <p class="indent" >
+	<a  id="x1-1190011"></a>
+	<hr class="float" />
+	<div class="float">
+	  <div class="caption">
+	    <span class="id">Table&#x00A0;B.1: </span>
+	    <span class="content">
+	      Possible permutations of statically mapped UML models based on execution on
+	      a 4 core LE1 base system.</span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="4">Core</th>
+		</tr>
+		<tr>
+		  <th>i</th>
+		  <th>i2</th>
+		  <th>i1_0</th>
+		  <th>i1_1</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>0</td>
+		  <td>i, Sob_0, Sob_1, fork</td>
+		  <td>i2, join</td>
+		  <td></td>
+		  <td></td>
+		</tr>
+		<tr>
+		  <td>1</td>
+		  <td>i, Sob_0, fork</td>
+		  <td>i2, join, Sob_1</td>
+		  <td></td>
+		  <td></td>
+		</tr>
+		<tr>
+		  <td>2</td>
+		  <td>i, Sob_0, fork</td>
+		  <td>i2, join</td>
+		  <td>Sob_1</td>
+		  <td></td>
+		</tr>
+		<tr>
+		  <td>3</td>
+		  <td>i, Sob_0, fork</td>
+		  <td>i2, join</td>
+		  <td></td>
+		  <td>Sob_1</td>
+		</tr>
+		<tr>
+		  <td>4</td>
+		  <td>i, Sob_1, fork</td>
+		  <td>i2, join, Sob_0</td>
+		  <td></td>
+		  <td></td>
+		</tr>
+		<tr>
+		  <td>5</td>
+		  <td>i, fork</td>
+		  <td>i2, join, Sob_0, Sob_1</td>
+		  <td></td>
+		  <td></td>
+		</tr>
+		<tr>
+		  <td>6</td>
+		  <td>i, fork</td>
+		  <td>i2, join, Sob_0</td>
+		  <td>Sob_1</td>
+		  <td></td>
+		</tr>
+		<tr>
+		  <td>7</td>
+		  <td>i, fork</td>
+		  <td>i2, join, Sob_0</td>
+		  <td></td>
+		  <td>Sob_1</td>
+		</tr>
+		<tr>
+		  <td>8</td>
+		  <td>i, Sob_1, fork</td>
+		  <td>i2, join</td>
+		  <td>Sob_0</td>
+		  <td></td>
+		</tr>
+		<tr>
+		  <td>9</td>
+		  <td>i, fork</td>
+		  <td>i2, join, Sob_1</td>
+		  <td>Sob_0</td>
+		  <td></td>
+		</tr>
+		<tr>
+		  <td>10</td>
+		  <td>i, fork</td>
+		  <td>i2, join</td>
+		  <td>Sob_0, Sob_1</td>
+		  <td></td>
+		</tr>
+		<tr>
+		  <td>11</td>
+		  <td>i, fork</td>
+		  <td>i2, join</td>
+		  <td>Sob_0</td>
+		  <td>Sob_1</td>
+		</tr>
+		<tr>
+		  <td>12</td>
+		  <td>i, Sob_1, fork</td>
+		  <td>i2, join</td>
+		  <td></td>
+		  <td>Sob_0</td>
+		</tr>
+		<tr>
+		  <td>13</td>
+		  <td>i, fork</td>
+		  <td>i2, join, Sob_1</td>
+		  <td></td>
+		  <td>Sob_0</td>
+		</tr>
+		<tr>
+		  <td>14</td>
+		  <td>i, fork</td>
+		  <td>i2, join</td>
+		  <td>Sob_1</td>
+		  <td>Sob_0</td>
+		</tr>
+		<tr>
+		  <td>15</td>
+		  <td>i, fork</td>
+		  <td>i2, join</td>
+		  <td></td>
+		  <td>Sob_0, Sob_1</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+	</div>
+	<hr class="endfloat" />
+      </p>
+    </div>
+
+    <p class="indent" >
+      To generate these permutations of the possible static mappings the following scripts are
+      executed:
+    </p>
+    <p class="indent" >
+      Firstly the architecture section is expanded to match that of &#8217;le1/4core.xml&#8217; which contains a 4
+      core LE1 system:
+      <div class="lstlisting" id="listing-10">
+	<span class="cmr-8">perl arch.pl -i Sobel_roundrobin_wildcard.xmi -l le1/4core.xml -o Sobel_roundrobin_wildcard_arch.xmi -t TOP</span>
+      </div>
+    </p>
+
+    <p class="indent" >
+      Then the application is expanded using the RoundRobin method:
+      <div class="lstlisting" id="listing-11">
+	<span class="cmr-8">perl appl_rr.pl -i Sobel_roundrobin_wildcard_arch.xmi -o Sobel_roundrobin_wildcard_appl.xmi -t TOP</span>
+      </div>
+    </p>
+
+    <p class="indent" >
+      The allocations are then read and all possible static mappings are generated. &#8217;output_images&#8217;
+      is a directory which is populated with images showing all possible permutations.
+
+      <div class="lstlisting" id="listing-12">
+	<span class="cmr-8">perl alloc.pl -i Sobel_roundrobin_wildcard_appl.xmi -o Sobel_roundrobin_wildcard.xml -s output_images -t TOP</span>
+      </div>
+    </p>
+
+    <p class="indent" >
+      Finally, a statically mapped UML model is generated. Note in this example &#8217;11&#8217; is passed,
+      resulting in the example shown in Figure&#x00A0;
+      <a href="#x1-1190064">B.4</a> being generated:
+
+      <div class="lstlisting" id="listing-13">
+	<span class="cmr-8">perl writeStatic.pl Sobel_roundrobin_wildcard_appl.xmi Sobel_roundrobin_wildcard.xml 11 > Sobel_roundrobin_wildcard_set.xmi</span>
+      </div>
+    </p>
+
+    <p class="indent" >
+      <hr class="figure" />
+      <a id="x1-1190064"></a>
+      <div class="figure" >
+	<p class="noindent" >
+	  <img src="img/full_flow_11.png" alt="PIC" class="graphics" width="361.34999pt" height="154.05232pt" >
+	  <br />
+	  <div class="caption" >
+	    <span class="id">Figure&#x00A0;B.4: </span>
+	    <span class="content">Mapping example generated by the alloc script</span>
+	  </div>
+	</p>
+
+      </div>
+      <hr class="endfigure" />
+    </p>
+
+    <p class="noindent">
+      The XMI files generated throughout this flow are available:<br/>
+      <a href="https://github.com/david-stevens/FullFlow/blob/master/Sobel_roundrobin_wildcard.xmi" target="_blank">Sobel_roundrobin_wildcard.xmi</a><br/>
+      <a href="https://github.com/david-stevens/FullFlow/blob/master/Sobel_roundrobin_wildcard_arch.xmi" target="_blank">Sobel_roundrobin_wildcard_arch.xmi</a><br/>
+      <a href="https://github.com/david-stevens/FullFlow/blob/master/Sobel_roundrobin_wildcard_appl.xmi" target="_blank">Sobel_roundrobin_wildcard_appl.xmi</a><br/>
+      <a href="https://github.com/david-stevens/FullFlow/blob/master/Sobel_roundrobin_wildcard.xml" target="_blank">Sobel_roundrobin_wildcard.xml</a><br/>
+      <a href="https://github.com/david-stevens/FullFlow/blob/master/Sobel_roundrobin_wildcard_set.xmi" target="_blank">Sobel_roundrobin_wildcard_set.xmi</a></br>
+      View all output images of possible static mappings:<br/>
+      <a href="https://github.com/david-stevens/FullFlow/blob/master/output_images" target="_blank">output_images</a>
+    </p>
+
+    <h3 class="sectionHead">
+      <span class="titlemark">B.3   </span>
+      FalconML
+    </h3>
+
+    <p class="noindent" >
+      The generated XMI model is then ran through FalconML in order to generate the multicore C
+      code required to execute on the LE1 system:
+      <div class="lstlisting" id="listing-14">
+	<span class="cmr-8">falconml -modelio -target c -top TOP -multicore -use_memory_pool Sobel_roundrobin_wildcard_set.xmi falconml_output_directory</span>
+      </div>
+    </p>
+
+    <p class="indent" >
+      This produces a set of C files required to implement the UML model which is synthesised by
+      FalconML.<br/>
+      <a href="https://github.com/david-stevens/FullFlow/blob/master/FalconML_console" target="_blank">FalconML console output</a><br/>
+      <a href="https://github.com/david-stevens/FullFlow/blob/master/FalconML_c.tar.gz" target="_blank">FalconML C code generated</a></br>
+    </p>
+
+    <h3 class="sectionHead">
+      <span class="titlemark">B.4   </span>
+      LE1 Tool Collection
+    </h3>
+
+    <p class="noindent" >
+      The generated C code is then passed to the LE1 Tool Collection which produces machine code for
+      the LE1, the flags passed to the tool collection are shown below:
+      <div class="lstlisting" id="listing-15">
+	<span class="cmr-8">perl generate.pl falconml_output_directory -syscall -DNUM_EVENT_QUEUES=4 -pthread -cpuid -DNDEBUG -xmlMM=le1/4core.xml -DMEM_POOL_SIZE=100000</span>
+      </div>
+    </p>
+
+    <p class="indent" >This generates a set of files required for both simulation and execution on a hardware
+      instantiation of the LE1.<br/>
+      <a href="https://github.com/david-stevens/FullFlow/blob/master/LE1_console" target="_blank">LE1 Tools console output</a><br/>
+    </p>
+
+    <h3 class="sectionHead">
+      <span class="titlemark">B.5   </span>
+      Insizzle
+    </h3>
+
+    <p class="noindent" >
+      The compiled LE1 machine code can then be executed on either the Simulator or on the
+      synthesised LE1 hardware. Shown here is the execution under simulation, run using:
+
+      <div class="lstlisting" id="listing-16">
+	<span class="cmr-8">./INSIZZLE machinemodel/model.xml -similarIRAM</span>
+      </div>
+    </p>
+
+    <p class="indent" >
+      The output from Insizzle displays the heuristics of each available core, in this case four,
+      including the instruction types which were executed and the number of cycles spent stalling.
+      <div class="lstlisting">
+	<span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122004r1"></a></span><span class="cmtt-8">Insizzle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">(</span><span class="cmtt-8">c1e194a</span><span class="cmtt-8">)</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122005r2"></a></span><span class="cmtt-8">PID</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">17031</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122006r3"></a></span><span class="cmtt-8">(</span><span class="cmtt-8">send</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">SIGUSR1</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">signal</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">to</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">produce</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">state</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">dump</span><span class="cmtt-8">)</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122007r4"></a></span><span class="cmtt-8">homogeneous</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122008r5"></a></span><span class="cmtt-8">Galaxy</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">setup</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">completed</span><span class="cmtt-8">.</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122009r6"></a></span><span class="cmtt-8">Please</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">specify</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">location</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">dram</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binary</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">for</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122010r7"></a></span><span class="cmtt-8">&#x003E;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">file</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">dram</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122011r8"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">dram</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">x845e4</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122012r9"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">required</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">67107840</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">bytes</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122013r10"></a></span><span class="cmtt-8">LOADING</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">BINARY</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122014r11"></a></span><span class="cmtt-8">Please</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">specify</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">location</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">iram</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binary</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">for</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0,</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122015r12"></a></span><span class="cmtt-8">&#x003E;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">file</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122016r13"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">xecb8</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122017r14"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">required</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">262144</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">bytes</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122018r15"></a></span><span class="cmtt-8">LOADING</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">BINARY</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122019r16"></a></span><span class="cmtt-8">Please</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">specify</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">location</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">iram</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binary</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">for</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0,</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122020r17"></a></span><span class="cmtt-8">&#x003E;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">file</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122021r18"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">xecb8</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122022r19"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">required</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">262144</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">bytes</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122023r20"></a></span><span class="cmtt-8">LOADING</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">BINARY</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122024r21"></a></span><span class="cmtt-8">Please</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">specify</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">location</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">iram</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binary</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">for</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0,</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">2</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122025r22"></a></span><span class="cmtt-8">&#x003E;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">file</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122026r23"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">xecb8</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122027r24"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">required</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">262144</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">bytes</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122028r25"></a></span><span class="cmtt-8">LOADING</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">BINARY</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122029r26"></a></span><span class="cmtt-8">Please</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">specify</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">location</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">iram</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binary</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">for</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0,</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">3</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122030r27"></a></span><span class="cmtt-8">&#x003E;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">file</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122031r28"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">xecb8</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122032r29"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">required</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">262144</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">bytes</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122033r30"></a></span><span class="cmtt-8">LOADING</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">BINARY</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122034r31"></a></span><span class="cmtt-8">Using</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Stack</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">/</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">hypercontext</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">256</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">KiB</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122035r32"></a></span><span class="cmtt-8">start</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">5005</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122036r33"></a></span><span class="cmtt-8">done</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1192857</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122037r34"></a></span><span class="cmtt-8">HALT</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">operation</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">received</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">from</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0][2][0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">at</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1193186</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122038r35"></a></span><span class="cmtt-8">HALT</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">operation</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">received</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">from</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0][0][0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">at</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1193846</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122039r36"></a></span><span class="cmtt-8">HALT</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">operation</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">received</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">from</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0][3][0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">at</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1194340</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122040r37"></a></span><span class="cmtt-8">HALT</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">operation</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">received</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">from</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0][1][0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">at</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1194898</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122041r38"></a></span><span class="cmtt-8">Start</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Time</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1355935756</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122042r39"></a></span><span class="cmtt-8">End</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Time</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1355935758</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122043r40"></a></span><span class="cmtt-8">Total</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Time</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">2</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">(</span><span class="cmtt-8">seconds</span><span class="cmtt-8">)</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122044r41"></a></span><span class="cmtt-8">performance</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">statistics</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122045r42"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">galaxy</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122046r43"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122047r44"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122048r45"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">hypercontext</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122049r46"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">breakdown</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122050r47"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1193847</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122051r48"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">stallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">429751</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122052r49"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">nopCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">235835</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122053r50"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">idleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122054r51"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">429751</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122055r52"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[1]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">571430</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122056r53"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[2]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">81076</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122057r54"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[3]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">40586</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122058r55"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[4]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">10764</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122059r56"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">decodeStallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">42547</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122060r57"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">5485</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122061r58"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchNotTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">48699</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122062r59"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">controlFlowChange</span><span class="cmtt-8">:129068</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122063r60"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">memoryAccessCount</span><span class="cmtt-8">:31787</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122064r61"></a></span><span class="cmtt-8">performance</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">statistics</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122065r62"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">galaxy</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122066r63"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122067r64"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122068r65"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">hypercontext</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122069r66"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">breakdown</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122070r67"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1194899</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122071r68"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">stallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">319013</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122072r69"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">nopCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">246914</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122073r70"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">idleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122074r71"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">319013</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122075r72"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[1]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">491020</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122076r73"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[2]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">288829</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122077r74"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[3]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">19274</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122078r75"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[4]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">5449</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122079r76"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">decodeStallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">119729</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122080r77"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">14002</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122081r78"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchNotTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">5213</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122082r79"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">controlFlowChange</span><span class="cmtt-8">:66428</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122083r80"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">memoryAccessCount</span><span class="cmtt-8">:37891</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122084r81"></a></span><span class="cmtt-8">performance</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">statistics</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122085r82"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">galaxy</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122086r83"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122087r84"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">2</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122088r85"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">hypercontext</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122089r86"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">breakdown</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122090r87"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1193187</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122091r88"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">stallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">332141</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122092r89"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">nopCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">254575</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122093r90"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">idleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122094r91"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">332141</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122095r92"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[1]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">523382</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122096r93"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[2]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">184318</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122097r94"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[3]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">36710</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122098r95"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[4]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">29267</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122099r96"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">decodeStallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">96878</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122100r97"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">10502</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122101r98"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchNotTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">27922</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122102r99"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">controlFlowChange</span><span class="cmtt-8">:78421</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122103r100"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">memoryAccessCount</span><span class="cmtt-8">:46843</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122104r101"></a></span><span class="cmtt-8">performance</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">statistics</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122105r102"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">galaxy</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122106r103"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122107r104"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">3</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122108r105"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">hypercontext</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122109r106"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">breakdown</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122110r107"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1194341</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122111r108"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">stallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">329992</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122112r109"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">nopCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">251704</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122113r110"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">idleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122114r111"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">329992</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122115r112"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[1]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">519368</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122116r113"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[2]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">182639</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122117r114"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[3]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">36112</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122118r115"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[4]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">28347</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122119r116"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">decodeStallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">95407</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122120r117"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">10448</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122121r118"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchNotTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">28249</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122122r119"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">controlFlowChange</span><span class="cmtt-8">:78195</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122123r120"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">memoryAccessCount</span><span class="cmtt-8">:52970</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122124r121"></a></span><span class="cmtt-8">filename</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">memoryDump_0</span><span class="cmtt-8">.</span><span class="cmtt-8">dat</span><br />
+	<div class="caption" >
+	  <span class="id">Listing&#x00A0;B.1:</span>
+	  <span class="content">Insizzle
+	    simulation
+	    output</span>
+	</div>
+      </div>
+      <a href="https://github.com/david-stevens/FullFlow/blob/master/Insizzle_console" target="_blank">Insizzle console output</a>
+    </p>
+
+    <h3 class="sectionHead">
+      <a href="https://github.com/david-stevens/FullFlow/archive/master.zip" target="_blank">
+	<p class="titlemark">Download .zip</p>
+      </a>
+      <a href="https://github.com/david-stevens/FullFlow" target="_blank">
+	<p class="titlemark">View on github.com</p>
+      </a>
+    </h3>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix C</span>
+      <br />
+      LE1 XML Config File
+    </h2>
+    LE1 XML Configuration File.
+    <br class="newline" />
+    XML file for configuring hardware and software sections of the LE1 tool collection.
+
+    <h3 class="sectionHead">
+      <a href="https://github.com/david-stevens/LE1XML/blob/master/LE1.xml" target="_blank">
+	<span class="titlemark">Download</span>
+      </a>
+    </h3>
+
+    <h3 class="sectionHead">
+      <a href="https://github.com/david-stevens/LE1XML/archive/master.zip" target="_blank">
+	<p class="titlemark">Download .zip</p>
+      </a>
+      <a href="https://github.com/david-stevens/LE1XML" target="_blank">
+	<p class="titlemark">View on github.com</p>
+      </a>
+    </h3>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix D</span>
+      <br />
+      LE1 API available within Microblaze
+    </h2>
+    The set_cpu() function sets the control registers within the LE1 to match those defined in &#8217;current&#8217;. &#8217;current&#8217; is a structure containing
+
+    <div class="lstlisting" id="listing-10"><span class="label"><a id="x1-118001r1"></a></span><span class="cmr-8">typedef</span><span class="cmr-8"> </span><span class="cmr-8">struct</span><span class="cmr-8"> </span><span class="cmsy-8">{</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118002r2"></a></span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">sys</span><span class="cmr-8">;</span><span class="cmr-8"> </span><span class="cmr-8">/</span><span class="cmsy-8">*</span><span class="cmr-8"> </span><span class="cmr-8">system</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">/</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118003r3"></a></span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">c</span><span class="cmr-8">;</span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">/</span><span class="cmsy-8">*</span><span class="cmr-8"> </span><span class="cmr-8">context</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">/</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118004r4"></a></span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">hc</span><span class="cmr-8">;</span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">/</span><span class="cmsy-8">*</span><span class="cmr-8"> </span><span class="cmr-8">hypercontext</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">/</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118005r5"></a></span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">cl</span><span class="cmr-8">;</span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">/</span><span class="cmsy-8">*</span><span class="cmr-8"> </span><span class="cmr-8">cluster</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">/</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118006r6"></a></span><span class="cmsy-8">}</span><span class="cmr-8"> </span><span class="cmr-8">currentT</span><span class="cmr-8">;</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118007r7"></a></span><span class="cmr-8">currentT</span><span class="cmr-8"> </span><span class="cmr-8">current</span><span class="cmr-8">;</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118008r8"></a></span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118009r9"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118010r10"></a></span><span class="cmr-8">set</span><span class="cmr-8">_cpu</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">currentT</span><span class="cmr-8"> </span><span class="cmr-8">current</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+
+    </div>
+    <p class="indent" >
+      The ctrl_wait() function polls the CTRL_REG within the current LE1, as specified through the set_cpu() function. A do while loop polls the CTRL_REG and prints each time 1M loops have been performed. (NB: This figure does not give the number of LE1 cycles executed).
+      <div class="lstlisting" id="listing-11"><span class="label"><a id="x1-118011r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118012r2"></a></span><span class="cmr-8">ctrl</span><span class="cmr-8">_wait</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">void</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The load_iram() function takes &#8217;inst_length&#8217; bytes as pointed to by &#8217;instructions&#8217; and
+      populates the LE1 instruction RAM. &#8217;context_id&#8217; is used set the current LE1 being targeted using
+      the set_cpu() function. Instructions are written to the LE1, read back and checked for consistency.
+      If read instruction differs from written instruction an error is printed and the program exits.
+      <div class="lstlisting" id="listing-12"><span class="label"><a id="x1-118013r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118014r2"></a></span><span class="cmr-8">load</span><span class="cmr-8">_iram</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">char</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">instructions</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">inst</span><span class="cmr-8">_length</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">context</span><span class="cmr-8">_id</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The load_dram() function takes &#8217;data_length&#8217; bytes as pointed to by &#8217;data&#8217; and populates
+      the LE1 data RAM. Data items are written to the LE1, read back and checked for
+      consistency. If read data item differs from written instruction an error is printed and the
+      program exits. If &#8217;MEMCHECK&#8217; is specified at compile time the LE1 data RAM not
+      initialised is zeroed out, this is for means of performing a comparison after execution.
+      <div class="lstlisting" id="listing-13"><span class="label"><a  id="x1-118015r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118016r2"></a></span><span class="cmr-8">load</span><span class="cmr-8">_dram</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">char</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">data</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">data</span><span class="cmr-8">_length</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+      </p>
+
+    <p class="indent" >
+      The run_application() function initialises the stack pointer with in the current LE1 specified by
+      &#8217;context_id&#8217; and writes to a control register to start the LE1 executing instructions from the
+      instruction RAM. The stack pointer is calculated using: ((&#8217;mem_top&#8217; - 0x100) - (&#8217;stack_size&#8217; *
+      &#8217;context_id&#8217;)). Where &#8217;mem_top&#8217; is the size of the data RAM within the LE1 and &#8217;stack_size&#8217; is
+      the number of bytes allocated for each contexts stack. This function starts the LE1
+      context and then calls ctrl_wait(), then returns after the LE1 has completed execution.
+
+      <div class="lstlisting" id="listing-14"><span class="label"><a  id="x1-118017r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118018r2"></a></span><span class="cmr-8">run</span><span class="cmr-8">_application</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">context</span><span class="cmr-8">_id</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">mem</span><span class="cmr-8">_top</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">stack</span><span class="cmr-8">_size</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The get_max_context() function performs a write and then read back to all LE1 instruction
+      RAMs to compute the number of valid LE1 contexts in the current system.
+      <br class="newline" />
+      Returns the number of contexts available within the current LE1 hardware configuration.
+
+      <div class="lstlisting" id="listing-15"><span class="label"><a  id="x1-118019r1"></a></span><span class="cmr-8">int</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118020r2"></a></span><span class="cmr-8">get</span><span class="cmr-8">_max</span><span class="cmr-8">_contexts</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">void</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The ctrl_wait_multicontext() function is similar to ctrl_wait() function except is loops from
+      zero to &#8217;max_context&#8217; until all LE1 context complete execution. <!--l. 149-->
+
+      <div class="lstlisting" id="listing-16"><span class="label"><a  id="x1-118021r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118022r2"></a></span><span class="cmr-8">ctrl</span><span class="cmr-8">_wait</span><span class="cmr-8">_multicontext</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">unsigned</span><span class="cmr-8"> </span><span class="cmr-8">max</span><span class="cmr-8">_context</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The run_application_multicontext() function is similar to the run_application() function
+      except it starts all available LE1 contexts as specified by &#8217;max_context&#8217; and then calls the
+      ctrl_wait_multicontext() function. When all contexts have completed execution the function
+      returns.
+      <div class="lstlisting" id="listing-17"><span class="label"><a  id="x1-118023r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118024r2"></a></span><span class="cmr-8">run</span><span class="cmr-8">_application</span><span class="cmr-8">_multicontext</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">max</span><span class="cmr-8">_contexts</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">mem</span><span class="cmr-8">_top</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">stack</span><span class="cmr-8">_size</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      Available if &#8217;MEMCHECK&#8217; is specified at compile time. This function compares the LE1 data
+      RAM with an array of known correct data RAM which can be produced by the Instruction Set
+      Simulator.
+      <br class="newline" />
+      Returns 0 on completion with zero errors or -1 otherwise.
+
+      <div class="lstlisting" id="listing-18"><span class="label"><a  id="x1-118025r1"></a></span><span class="cmr-8">int</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118026r2"></a></span><span class="cmr-8">check</span><span class="cmr-8">_dram</span><span class="cmr-8">_after</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">void</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The dbg_wr() function simply writes &#8217;wrdata&#8217; to the address specified by &#8217;addr&#8217;.
+
+      <div class="lstlisting" id="listing-19"><span class="label"><a  id="x1-118027r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118028r2"></a></span><span class="cmr-8">dbg</span><span class="cmr-8">_wr</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">addr</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">wrdata</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The dbg_rd() function simply reads from the address specified by &#8217;addr&#8217;.
+      <br class="newline" />
+      Return the value read from the LE1 at address &#8217;addr&#8217;.
+      <div class="lstlisting" id="listing-20"><span class="label"><a  id="x1-118029r1"></a></span><span class="cmr-8">int</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118030r2"></a></span><span class="cmr-8">dbg</span><span class="cmr-8">_rd</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">addr</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The busy_wait() function blocks until the busy register is clear. This is used after reads and
+      writes to ensure data is correct.
+
+      <div class="lstlisting" id="listing-21"><span class="label"><a  id="x1-118031r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118032r2"></a></span><span class="cmr-8">busy</span><span class="cmr-8">_wait</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">void</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The write_special() function writes &#8217;data&#8217; to &#8221;special&#8221; registers within the LE1 space. (For
+      example; the program counter).
+      <div class="lstlisting" id="listing-22"><span class="label"><a  id="x1-118033r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118034r2"></a></span><span class="cmr-8">write</span><span class="cmr-8">_special</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">special</span><span class="cmr-8">_reg</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">data</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The write_cr() function writes &#8217;data&#8217; to the control register specified by &#8217;ctrl_reg&#8217;.
+
+      <div class="lstlisting" id="listing-23"><span class="label"><a  id="x1-118035r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118036r2"></a></span><span class="cmr-8">write</span><span class="cmr-8">_cr</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">ctrl</span><span class="cmr-8">_reg</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">data</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The read_cr() function reads from control space registers specified by &#8217;ctrl_reg&#8217;.
+      <br class="newline" />
+      Return the value of the register specified by &#8217;ctrl_reg&#8217;.
+
+      <div class="lstlisting" id="listing-24"><span class="label"><a  id="x1-118037r1"></a></span><span class="cmr-8">int</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118038r2"></a></span><span class="cmr-8">read</span><span class="cmr-8">_cr</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">ctrl</span><span class="cmr-8">_reg</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The grp_wr() function directly writes &#8217;wrdata&#8217; to the general purpose register specified by
+      &#8217;reg&#8217;.
+      <div class="lstlisting" id="listing-25"><span class="label"><a  id="x1-118039r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118040r2"></a></span><span class="cmr-8">grp</span><span class="cmr-8">_wr</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">reg</span><span class="cmr-8"> </span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">wrdata</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix E</span>
+      <br />Leon3MP SMT Modifications
+    </h2>
+    This section includes the Assembly and C code
+    written to modify the Leon3MP system to make it able to execute a small section of the PThread
+    library.
+    <br class="newline" />
+
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/Leon3MP_Threads/blob/master/assembly/crt0.S" target="_blank">
+	<span class="cmbx-10">crt0.S</span>
+      </a>
+      <br class="newline" />
+      Assembly boot loader of Leon3MP system modified to set stack pointer registers for each CPU
+      in relation to their CPUID as well as only formatting global memory if CPUID is 0.
+    </p>
+
+    <p class="noindent">
+      <a href="https://github.com/david-stevens/Leon3MP_Threads/blob/master/inc/leon3mp_pthread.h" target="_blank">
+	<span class="cmbx-10">leon3mp</span>
+	<span class="cmbx-10">_pthread.h</span>
+      </a>
+      <br class="newline" />
+      Header file defining available PThread functions in the Leon3MP system.
+    </p>
+
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/Leon3MP_Threads/blob/master/src/leon3mp_pthread.c" target="_blank">
+      <span class="cmbx-10">leon3mp</span>
+      <span class="cmbx-10">_pthread.c</span>
+      </a>
+      <br class="newline" />
+      Implementation of available PThread functions in the Leon3MP system. Also included are the
+      sections of code used to stall the functions in order to match the execution times of the functions
+      in other library implementations.
+    </p>
+
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/Leon3MP_Threads/blob/master/inc/platform.h" target="_blank">
+      <span class="cmbx-10">platform.h</span>
+      </a>
+      <br class="newline" />
+      Header file defining global structures and arrays for Leon3MP PThread platform.
+    </p>
+
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/Leon3MP_Threads/blob/master/src/platform.c" target="_blank">
+      <span class="cmbx-10">platform.c</span>
+      </a>
+      <br class="newline" />
+      Implementation of platform initialisation and cleanup. CPU0 initialises all other available CPUs
+      and then executes main body of code. CPU0 is seen as the master thread in this implementation.
+    </p>
+
+    <h3 class="sectionHead">
+      <a href="https://github.com/david-stevens/Leon3MP_Threads/archive/master.zip" target="_blank">
+	<p class="titlemark">Download .zip</p>
+      </a>
+      <a href="https://github.com/david-stevens/Leon3MP_Threads" target="_blank">
+	<p class="titlemark">View on github.com</p>
+      </a>
+    </h3>
+
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix F</span>
+      <br />
+      X11 User Interaction Capture
+    </h2>
+    Program code for capturing multiple input devices
+    through the use of the X11 library. Compile with -lm -lX11 -lXi.
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/Capture-user-events/blob/master/inc/capture.h" target="_blank">
+      <span class="cmbx-10">capture.h</span>
+      </a>
+      <br class="newline" />
+      Header file including required X11 library files along and definitions of functions to capture
+      devices.
+    </p>
+
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/Capture-user-events/blob/master/src/capture.c" target="_blank">
+      <span class="cmbx-10">capture.c</span>
+      </a>
+      <br class="newline" />
+      Implementation device capture, check specified devices and log key and button presses and
+      releases.
+    </p>
+
+    <p class="noindent" >
+      <a href="https://github.com/david-stevens/Capture-user-events/blob/master/src/main.c" target="_blank">
+      <span class="cmbx-10">main.c</span>
+      </a>
+      <br class="newline" />
+      Implementation to full system to specify input devices to log and then pull all event from X11
+      event queue and display information as specified.
+    </p>
+
+    <h3 class="sectionHead">
+      <a href="https://github.com/david-stevens/Capture-user-events/archive/master.zip" target="_blank">
+	<p class="titlemark">Download .zip</p>
+      </a>
+      <a href="https://github.com/david-stevens/Capture-user-events" target="_blank">
+	<p class="titlemark">View on github.com</p>
+      </a>
+    </h3>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix G</span>
+      <br />PThread Execution Results
+    </h2>
+
+    <p class="noindent" >
+      The cycle counts produced through execution of example applications on alternative architectures
+      as presented in Chapter 6 are included in full here.
+      <div class="table">
+        <p class="indent" >
+
+          <div class="caption">
+	    <span class="id">Table G.1: </span>
+	    <span class="content">
+	      Execution of Mandelbrot Set threading using coarse grain PThread operations on available architectures.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="8">Cores</th>
+		</tr>
+		<tr>
+		  <th>1</th>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Microblaze</td>
+		  <td>991532686</td>
+		  <td>991579915</td>
+		  <td>991610684</td>
+		  <td>991639734</td>
+		  <td>991684602</td>
+		  <td>991727341</td>
+		  <td>991783111</td>
+		  <td>991817892</td>
+		</tr>
+		<tr>
+		  <td class="rb">Leon3</td>
+		  <td>1469380425</td>
+		  <td>1484432700</td>
+		  <td>1500021675</td>
+		  <td>1502281500</td>
+		  <td>1518018375</td>
+		  <td>1552456800</td>
+		  <td>1554512400</td>
+		  <td>1562260200</td>
+		</tr>
+		<tr>
+		  <td class="rb">Leon3MP</td>
+		  <td>1468194900</td>
+		  <td>737993925</td>
+		  <td>496522875</td>
+		  <td>373056375</td>
+		  <td>301424550</td>
+		  <td>252809400</td>
+		  <td>217061850</td>
+		  <td>191365950</td>
+		</tr>
+		<tr>
+		  <td class="rb">Leon3MP (Microblaze)</td>
+		  <td>1468194675</td>
+		  <td>737995950</td>
+		  <td>496529700</td>
+		  <td>373061100</td>
+		  <td>301430700</td>
+		  <td>252818325</td>
+		  <td>217071450</td>
+		  <td>191375850</td>
+		</tr>
+		<tr>
+		  <td class="rb">Leon3MP (Leon3)</td>
+		  <td>1468194900</td>
+		  <td>738009375</td>
+		  <td>497271900</td>
+		  <td>373790100</td>
+		  <td>302517300</td>
+		  <td>253574100</td>
+		  <td>218529525</td>
+		  <td>193535700</td>
+		</tr>
+		<tr>
+		  <td class="rb">LE1</td>
+		  <td>476779180</td>
+		  <td>240094118</td>
+		  <td>161549508</td>
+		  <td>121351939</td>
+		  <td>98032077</td>
+		  <td>82282386</td>
+		  <td>70631182</td>
+		  <td>62231733</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+	  <div class="caption">
+	    <span class="id">Table G.2: </span>
+	    <span class="content">
+	      Execution of Mandelbrot Set threading using fine grain PThread operations on available architectures.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="8">Cores</th>
+		</tr>
+		<tr>
+		  <th>1</th>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Microblaze</td>
+		  <td>993694500</td>
+		  <td>1127692136</td>
+		  <td>1137219430</td>
+		  <td>1142472937</td>
+		  <td>1146155580</td>
+		  <td>1149012033</td>
+		  <td>1152451534</td>
+		  <td>1153533971</td>
+		</tr>
+		<tr>
+		  <td>Leon3</td>
+		  <td>-</td>
+		  <td>-</td>
+		  <td>-</td>
+		  <td>-</td>
+		  <td>-</td>
+		  <td>-</td>
+		  <td>-</td>
+		  <td>-</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>1470098025</td>
+		  <td>758702700</td>
+		  <td>517788825</td>
+		  <td>396089250</td>
+		  <td>323202750</td>
+		  <td>274188225</td>
+		  <td>244403400</td>
+		  <td>212340600</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>1470097875</td>
+		  <td>884308350</td>
+		  <td>686935950</td>
+		  <td>587614650</td>
+		  <td>526643625</td>
+		  <td>485837100</td>
+		  <td>462268350</td>
+		  <td>434414475</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>1470098025</td>
+		  <td>15126905100</td>
+		  <td>19679977050</td>
+		  <td>21955768875</td>
+		  <td>23320747800</td>
+		  <td>24231221025</td>
+		  <td>25030385025</td>
+		  <td>25369155750</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>516154855</td>
+		  <td>247990545</td>
+		  <td>169700908</td>
+		  <td>130393276</td>
+		  <td>106514808</td>
+		  <td>90550611</td>
+		  <td>80816031</td>
+		  <td>70432697</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+	  <div class="caption">
+	    <span class="id">Table G.3: </span>
+	    <span class="content">
+	      Coarse grain Mandelbrot Set execution speed up relative to execution on a
+	      single core/CPU.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="7">Cores</th>
+		</tr>
+		<tr>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Microblaze</td>
+		  <td>1.000</td>
+		  <td>1.000</td>
+		  <td>1.000</td>
+		  <td>1.000</td>
+		  <td>1.000</td>
+		  <td>1.000</td>
+		  <td>1.000</td>
+		</tr>
+		<tr>
+		  <td>Leon3</td>
+		  <td>1.010</td>
+		  <td>1.021</td>
+		  <td>1.022</td>
+		  <td>1.033</td>
+		  <td>1.057</td>
+		  <td>1.058</td>
+		  <td>1.063</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>0.503</td>
+		  <td>0.338</td>
+		  <td>0.254</td>
+		  <td>0.205</td>
+		  <td>0.172</td>
+		  <td>0.148</td>
+		  <td>0.130</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>0.503</td>
+		  <td>0.338</td>
+		  <td>0.254</td>
+		  <td>0.205</td>
+		  <td>0.172</td>
+		  <td>0.148</td>
+		  <td>0.130</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>0.503</td>
+		  <td>0.339</td>
+		  <td>0.255</td>
+		  <td>0.206</td>
+		  <td>0.173</td>
+		  <td>0.149</td>
+		  <td>0.132</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>0.504</td>
+		  <td>0.339</td>
+		  <td>0.255</td>
+		  <td>0.206</td>
+		  <td>0.173</td>
+		  <td>0.148</td>
+		  <td>0.131</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+	  <div class="caption">
+	    <span class="id">Table G.4: </span>
+	    <span class="content">
+	      Fine grain Mandelbrot Set execution speed up relative to execution on a single
+	      core/CPU.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="7">Cores</th>
+		</tr>
+		<tr>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Microblaze</td>
+		  <td>1.135</td>
+		  <td>1.144</td>
+		  <td>1.150</td>
+		  <td>1.153</td>
+		  <td>1.156</td>
+		  <td>1.160</td>
+		  <td>1.161</td>
+		</tr>
+		<tr>
+		  <td>Leon3</td>
+		  <td>-</td>
+		  <td>-</td>
+		  <td>-</td>
+		  <td>-</td>
+		  <td>-</td>
+		  <td>-</td>
+		  <td>-</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>0.516</td>
+		  <td>0.352</td>
+		  <td>0.269</td>
+		  <td>0.220</td>
+		  <td>0.187</td>
+		  <td>0.166</td>
+		  <td>0.144</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>0.602</td>
+		  <td>0.467</td>
+		  <td>0.400</td>
+		  <td>0.358</td>
+		  <td>0.330</td>
+		  <td>0.314</td>
+		  <td>0.296</td>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>10.290</td>
+		  <td>13.387</td>
+		  <td>14.935</td>
+		  <td>15.863</td>
+		  <td>16.483</td>
+		  <td>17.026</td>
+		  <td>17.257</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>0.480</td>
+		  <td>0.329</td>
+		  <td>0.253</td>
+		  <td>0.206</td>
+		  <td>0.175</td>
+		  <td>0.157</td>
+		  <td>0.136</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+	  <div class="caption">
+	    <span class="id">Table G.5: </span>
+	    <span class="content">
+	      Execution of JPEG Decode threading using coarse grain PThread operations on available architectures.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="8">Cores</th>
+		</tr>
+		<tr>
+		  <th>1</th>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>27261300</td>
+		  <td>16758225</td>
+		  <td>14366775</td>
+		  <td>12392475</td>
+		  <td>12513900</td>
+		  <td>12821700</td>
+		  <td>13427250</td>
+		  <td>11237250</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>27264000</td>
+		  <td>16781400</td>
+		  <td>14517750</td>
+		  <td>12405450</td>
+		  <td>12553500</td>
+		  <td>12898950</td>
+		  <td>13501050</td>
+		  <td>11310975</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>27264375</td>
+		  <td>17142375</td>
+		  <td>15190725</td>
+		  <td>13370400</td>
+		  <td>13959150</td>
+		  <td>14698050</td>
+		  <td>15630225</td>
+		  <td>13818150</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>30209314</td>
+		  <td>16769381</td>
+		  <td>13917679</td>
+		  <td>10826805</td>
+		  <td>10929481</td>
+		  <td>11046915</td>
+		  <td>11243771</td>
+		  <td>8482569</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+	  <div class="caption">
+	    <span class="id">Table G.6: </span>
+	    <span class="content">
+	      Execution of JPEG Decode threading using fine grain PThread operations on available architectures.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="8">Cores</th>
+		</tr>
+		<tr>
+		  <th>1</th>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>3131325</td>
+		  <td>2954775</td>
+		  <td>2948925</td>
+		  <td>2879025</td>
+		  <td>2950725</td>
+		  <td>2993250</td>
+		  <td>2987175</td>
+		  <td>2979375</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>3131250</td>
+		  <td>3227475</td>
+		  <td>3542325</td>
+		  <td>3787275</td>
+		  <td>4160700</td>
+		  <td>4501200</td>
+		  <td>4798725</td>
+		  <td>5083350</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>3131325</td>
+		  <td>38860650</td>
+		  <td>74803950</td>
+		  <td>110685525</td>
+		  <td>146694900</td>
+		  <td>182665425</td>
+		  <td>218602200</td>
+		  <td>254518725</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>3450056</td>
+		  <td>3335499</td>
+		  <td>3345276</td>
+		  <td>3297675</td>
+		  <td>3331164</td>
+		  <td>3339996</td>
+		  <td>3350652</td>
+		  <td>3314955</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+
+	  <div class="caption">
+	    <span class="id">Table G.7: </span>
+	    <span class="content">
+	      Coarse grain JPEG Decode execution speed up relative to execution on a single
+	      core/CPU.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="7">Cores</th>
+		</tr>
+		<tr>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>0.615</td>
+		  <td>0.527</td>
+		  <td>0.455</td>
+		  <td>0.459</td>
+		  <td>0.470</td>
+		  <td>0.493</td>
+		  <td>0.412</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>0.616</td>
+		  <td>0.532</td>
+		  <td>0.455</td>
+		  <td>0.460</td>
+		  <td>0.473</td>
+		  <td>0.495</td>
+		  <td>0.415</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>0.629</td>
+		  <td>0.557</td>
+		  <td>0.490</td>
+		  <td>0.512</td>
+		  <td>0.539</td>
+		  <td>0.573</td>
+		  <td>0.507</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>0.555</td>
+		  <td>0.461</td>
+		  <td>0.358</td>
+		  <td>0.362</td>
+		  <td>0.366</td>
+		  <td>0.372</td>
+		  <td>0.281</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+	  <div class="caption">
+	    <span class="id">Table G.8: </span>
+	    <span class="content">
+	      Fine grain JPEG Decode execution speed up relative to execution on a single
+	      core/CPU.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="7">Cores</th>
+		</tr>
+		<tr>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>0.944</td>
+		  <td>0.942</td>
+		  <td>0.919</td>
+		  <td>0.942</td>
+		  <td>0.956</td>
+		  <td>0.954</td>
+		  <td>0.951</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>1.031</td>
+		  <td>1.131</td>
+		  <td>1.210</td>
+		  <td>1.329</td>
+		  <td>1.438</td>
+		  <td>1.533</td>
+		  <td>1.623</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>12.410</td>
+		  <td>23.889</td>
+		  <td>35.348</td>
+		  <td>46.848</td>
+		  <td>58.335</td>
+		  <td>69.811</td>
+		  <td>81.281</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>0.967</td>
+		  <td>0.970</td>
+		  <td>0.956</td>
+		  <td>0.966</td>
+		  <td>0.968</td>
+		  <td>0.971</td>
+		  <td>0.961</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+	  <div class="caption">
+	    <span class="id">Table G.9: </span>
+	    <span class="content">
+	      Execution of Sobel Filter threading using coarse grain PThread operations on available architectures.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="8">Cores</th>
+		</tr>
+		<tr>
+		  <th>1</th>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>1215757950</td>
+		  <td>611657400</td>
+		  <td>412095075</td>
+		  <td>311247525</td>
+		  <td>253304775</td>
+		  <td>214910175</td>
+		  <td>190099725</td>
+		  <td>171595875</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>1470910500</td>
+		  <td>739912275</td>
+		  <td>498852375</td>
+		  <td>377528550</td>
+		  <td>307923525</td>
+		  <td>262305450</td>
+		  <td>233432775</td>
+		  <td>212422800</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>1470910350</td>
+		  <td>740272950</td>
+		  <td>498902925</td>
+		  <td>377814375</td>
+		  <td>308647800</td>
+		  <td>263350800</td>
+		  <td>233908875</td>
+		  <td>214051200</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>927618395</td>
+		  <td>479936069</td>
+		  <td>326716224</td>
+		  <td>256128948</td>
+		  <td>210709074</td>
+		  <td>183354844</td>
+		  <td>165937056</td>
+		  <td>153249931</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+	  <div class="caption">
+	    <span class="id">Table G.10: </span>
+	    <span class="content">
+	      Execution of Sobel Filter threading using fine grain PThread operations on available architectures.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="8">Cores</th>
+		</tr>
+		<tr>
+		  <th>1</th>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>1234326300</td>
+		  <td>669003225</td>
+		  <td>475069275</td>
+		  <td>378237300</td>
+		  <td>318999600</td>
+		  <td>279668775</td>
+		  <td>253175325</td>
+		  <td>236765325</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>1234324875</td>
+		  <td>1172965050</td>
+		  <td>1143620175</td>
+		  <td>1136656425</td>
+		  <td>1124633925</td>
+		  <td>1120754625</td>
+		  <td>1121373300</td>
+		  <td>1111458000</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>1234324800</td>
+		  <td>57768775875</td>
+		  <td>76722624375</td>
+		  <td>86290815900</td>
+		  <td>91956927225</td>
+		  <td>96035451525</td>
+		  <td>99051313500</td>
+		  <td>100462736775</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>928530875</td>
+		  <td>513599925</td>
+		  <td>364332540</td>
+		  <td>289351733</td>
+		  <td>248155821</td>
+		  <td>221338729</td>
+		  <td>204067780</td>
+		  <td>191785239</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+	  <div class="caption">
+	    <span class="id">Table G.11: </span>
+	    <span class="content">
+	      Coarse grain Sobel Filter execution speed up relative to execution on a single
+	      core/CPU.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="7">Cores</th>
+		</tr>
+		<tr>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		  <td>Leon3MP</td>
+		  <td>0.503</td>
+		  <td>0.339</td>
+		  <td>0.256</td>
+		  <td>0.208</td>
+		  <td>0.177</td>
+		  <td>0.156</td>
+		  <td>0.141</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>0.503</td>
+		  <td>0.339</td>
+		  <td>0.257</td>
+		  <td>0.209</td>
+		  <td>0.178</td>
+		  <td>0.159</td>
+		  <td>0.144</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>0.503</td>
+		  <td>0.339</td>
+		  <td>0.257</td>
+		  <td>0.210</td>
+		  <td>0.179</td>
+		  <td>0.159</td>
+		  <td>0.146</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>0.517</td>
+		  <td>0.352</td>
+		  <td>0.276</td>
+		  <td>0.227</td>
+		  <td>0.198</td>
+		  <td>0.179</td>
+		  <td>0.165</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+	  <div class="caption">
+	    <span class="id">Table G.12: </span>
+	    <span class="content">
+	      Fine grain Sobel Filter execution speed up relative to execution on a single
+	      core/CPU.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="7">Cores</th>
+		</tr>
+		<tr>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>0.542</td>
+		  <td>0.385</td>
+		  <td>0.306</td>
+		  <td>0.258</td>
+		  <td>0.227</td>
+		  <td>0.205</td>
+		  <td>0.192</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>0.950</td>
+		  <td>0.927</td>
+		  <td>0.921</td>
+		  <td>0.911</td>
+		  <td>0.908</td>
+		  <td>0.908</td>
+		  <td>0.900</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>46.802</td>
+		  <td>62.158</td>
+		  <td>69.909</td>
+		  <td>74.500</td>
+		  <td>77.804</td>
+		  <td>80.247</td>
+		  <td>81.391</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>0.553</td>
+		  <td>0.392</td>
+		  <td>0.312</td>
+		  <td>0.267</td>
+		  <td>0.238</td>
+		  <td>0.220</td>
+		  <td>0.207</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+	  <div class="caption">
+	    <span class="id">Table G.13: </span>
+	    <span class="content">
+	      Execution of DES Encryption threading using coarse grain PThread operations on available architectures.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="8">Cores</th>
+		</tr>
+		<tr>
+		  <th>1</th>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>168063600</td>
+		  <td>84592125</td>
+		  <td>57748875</td>
+		  <td>42839025</td>
+		  <td>36732825</td>
+		  <td>30140250</td>
+		  <td>26487975</td>
+		  <td>23575575</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>168063300</td>
+		  <td>84596175</td>
+		  <td>57735600</td>
+		  <td>42857775</td>
+		  <td>35055750</td>
+		  <td>29847825</td>
+		  <td>25952925</td>
+		  <td>23295900</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>168062850</td>
+		  <td>84970425</td>
+		  <td>58454475</td>
+		  <td>44066100</td>
+		  <td>36519000</td>
+		  <td>31197750</td>
+		  <td>27936375</td>
+		  <td>25735500</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>159629352</td>
+		  <td>82779262</td>
+		  <td>59900716</td>
+		  <td>48102747</td>
+		  <td>37932640</td>
+		  <td>33379314</td>
+		  <td>30071727</td>
+		  <td>27787002</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+	  <div class="caption">
+	    <span class="id">Table G.14: </span>
+	    <span class="content">
+	      Execution of DES Encryption threading using fine grain PThread operations on available architectures.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	       <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="8">Cores</th>
+		</tr>
+		<tr>
+		  <th>1</th>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	       </thead>
+	      <tbody>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>167117400</td>
+		  <td>85335150</td>
+		  <td>60366450</td>
+		  <td>46602525</td>
+		  <td>39548325</td>
+		  <td>33885375</td>
+		  <td>30563250</td>
+		  <td>27192525</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>167117775</td>
+		  <td>98931075</td>
+		  <td>76645275</td>
+		  <td>64048050</td>
+		  <td>57768375</td>
+		  <td>52594050</td>
+		  <td>49749675</td>
+		  <td>46803375</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>167117625</td>
+		  <td>1619264550</td>
+		  <td>2104054650</td>
+		  <td>2344526325</td>
+		  <td>2491062300</td>
+		  <td>2587476300</td>
+		  <td>2657341275</td>
+		  <td>2707097100</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>159858703</td>
+		  <td>77750224</td>
+		  <td>58088911</td>
+		  <td>42391540</td>
+		  <td>35793100</td>
+		  <td>31598587</td>
+		  <td>29865978</td>
+		  <td>27720625</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+
+	  <div class="caption">
+	    <span class="id">Table G.15: </span>
+	    <span class="content">
+	      Coarse grain DES Encryption execution speed up relative to execution on a
+	      single core/CPU.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="7">Cores</th>
+		</tr>
+		<tr>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>0.503</td>
+		  <td>0.344</td>
+		  <td>0.255</td>
+		  <td>0.219</td>
+		  <td>0.179</td>
+		  <td>0.158</td>
+		  <td>0.140</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>0.503</td>
+		  <td>0.344</td>
+		  <td>0.255</td>
+		  <td>0.209</td>
+		  <td>0.178</td>
+		  <td>0.154</td>
+		  <td>0.139</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>0.506</td>
+		  <td>0.348</td>
+		  <td>0.262</td>
+		  <td>0.217</td>
+		  <td>0.186</td>
+		  <td>0.166</td>
+		  <td>0.153</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>0.519</td>
+		  <td>0.375</td>
+		  <td>0.301</td>
+		  <td>0.238</td>
+		  <td>0.209</td>
+		  <td>0.188</td>
+		  <td>0.174</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+	  <div class="caption">
+	    <span class="id">Table G.16: </span>
+	    <span class="content">
+	      Fine grain DES Encryption execution speed up relative to execution on a single
+	      core/CPU.
+	    </span>
+	  </div>
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="7">Cores</th>
+		</tr>
+		<tr>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Leon3MP</td>
+		  <td>0.511</td>
+		  <td>0.361</td>
+		  <td>0.279</td>
+		  <td>0.237</td>
+		  <td>0.203</td>
+		  <td>0.183</td>
+		  <td>0.163</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Microblaze)</td>
+		  <td>0.592</td>
+		  <td>0.459</td>
+		  <td>0.383</td>
+		  <td>0.346</td>
+		  <td>0.315</td>
+		  <td>0.298</td>
+		  <td>0.280</td>
+		</tr>
+		<tr>
+		  <td>Leon3MP (Leon3)</td>
+		  <td>9.689</td>
+		  <td>12.590</td>
+		  <td>14.029</td>
+		  <td>14.906</td>
+		  <td>15.483</td>
+		  <td>15.901</td>
+		  <td>16.199</td>
+		</tr>
+		<tr>
+		  <td>LE1</td>
+		  <td>0.486</td>
+		  <td>0.363</td>
+		  <td>0.265</td>
+		  <td>0.224</td>
+		  <td>0.198</td>
+		  <td>0.187</td>
+		  <td>0.173</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+	</p>
+      </div>
+    </p>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix H</span>
+      <br />
+      CPUID Execution Results
+    </h2>
+
+    <p class="noindent" >
+      The cycle counts produced through execution of example applications on alternative architectures
+      as presented in Chapter 6 are included in full here.
+
+      <div class="table">
+	<p class="indent" >
+          <div class="caption">
+	    <span class="id">Table H.1: </span>
+	    <span class="content">
+	      Cycle counts of all benchmarks executing on the LE1 using CPUID to perform parallelism within the applications.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="8">Cores</th>
+		</tr>
+		<tr>
+		  <th>1</th>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Mandelbrot</td>
+		  <td>476626084</td>
+		  <td>238930539</td>
+		  <td>161218988</td>
+		  <td>120771547</td>
+		  <td>97844959</td>
+		  <td>84144576</td>
+		  <td>70479738</td>
+		  <td>61959510</td>
+		</tr>
+		<tr>
+		  <td>JPEG Decode</td>
+		  <td>30209399</td>
+		  <td>16767078</td>
+		  <td>13947885</td>
+		  <td>10878791</td>
+		  <td>11042612</td>
+		  <td>11074709</td>
+		  <td>11320455</td>
+		  <td>8483213</td>
+		</tr>
+		<tr>
+		  <td>Sobel Filter</td>
+		  <td>928635366</td>
+		  <td>481397691</td>
+		  <td>331330070</td>
+		  <td>256990751</td>
+		  <td>213244923</td>
+		  <td>184479216</td>
+		  <td>167426393</td>
+		  <td>153812096</td>
+		</tr>
+		<tr>
+		  <td>DES</td>
+		  <td>159629373</td>
+		  <td>76786266</td>
+		  <td>58128430</td>
+		  <td>45911083</td>
+		  <td>36222177</td>
+		  <td>32625919</td>
+		  <td>29244886</td>
+		  <td>27503813</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+          <div class="caption">
+	    <span class="id">Table H.2: </span>
+	    <span class="content">
+	      Cycle counts of all benchmarks executing on the Leon3MP using CPUID to perform parallelism within the applications.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="8">Cores</th>
+		</tr>
+		<tr>
+		  <th>1</th>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Mandelbrot</td>
+		  <td>1468183725</td>
+		  <td>737982900</td>
+		  <td>496525050</td>
+		  <td>373049100</td>
+		  <td>301430025</td>
+		  <td>252815400</td>
+		  <td>217068450</td>
+		  <td>191362350</td>
+		</tr>
+		<tr>
+		  <td>JPEG Decode</td>
+		  <td>27161700</td>
+		  <td>16655400</td>
+		  <td>14569425</td>
+		  <td>12322875</td>
+		  <td>12620475</td>
+		  <td>12905550</td>
+		  <td>13523400</td>
+		  <td>11243025</td>
+		</tr>
+		<tr>
+		  <td>Sobel Filter</td>
+		  <td>1215660450</td>
+		  <td>611568150</td>
+		  <td>412035225</td>
+		  <td>311183250</td>
+		  <td>253327275</td>
+		  <td>214915425</td>
+		  <td>190203150</td>
+		  <td>171625650</td>
+		</tr>
+		<tr>
+		  <td>DES</td>
+		  <td>166939050</td>
+		  <td>84047700</td>
+		  <td>57654000</td>
+		  <td>43768275</td>
+		  <td>35834100</td>
+		  <td>31263975</td>
+		  <td>26042325</td>
+		  <td>23332950</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+          <div class="caption">
+	    <span class="id">Table H.3: </span>
+	    <span class="content">
+	      Speed up of benchmarks on the LE1 using CPUID to perform parallelism,
+	      relative to execution on a single core.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="7">Cores</th>
+		</tr>
+		<tr>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Mandelbrot</td>
+		  <td>0.501</td>
+		  <td>0.338</td>
+		  <td>0.253</td>
+		  <td>0.205</td>
+		  <td>0.177</td>
+		  <td>0.148</td>
+		  <td>0.130</td>
+		</tr>
+		<tr>
+		  <td>JPEG Decode</td>
+		  <td>0.555</td>
+		  <td>0.462</td>
+		  <td>0.360</td>
+		  <td>0.366</td>
+		  <td>0.367</td>
+		  <td>0.375</td>
+		  <td>0.281</td>
+		</tr>
+		<tr>
+		  <td>Sobel Filter</td>
+		  <td>0.518</td>
+		  <td>0.357</td>
+		  <td>0.277</td>
+		  <td>0.230</td>
+		  <td>0.199</td>
+		  <td>0.180</td>
+		  <td>0.166</td>
+		</tr>
+		<tr>
+		  <td>DES</td>
+		  <td>0.481</td>
+		  <td>0.364</td>
+		  <td>0.288</td>
+		  <td>0.227</td>
+		  <td>0.204</td>
+		  <td>0.183</td>
+		  <td>0.172</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+          <div class="caption">
+	    <span class="id">Table H.4: </span>
+	    <span class="content">
+	      Speed up of benchmarks on the Leon3MP using CPUID to perform parallelism,
+	      relative to execution on a single CPU.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Platform</th>
+		  <th colspan="7">Cores</th>
+		</tr>
+		<tr>
+		  <th>2</th>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Mandelbrot</td>
+		  <td>0.503</td>
+		  <td>0.338</td>
+		  <td>0.254</td>
+		  <td>0.205</td>
+		  <td>0.172</td>
+		  <td>0.148</td>
+		  <td>0.130</td>
+		</tr>
+		<tr>
+		  <td>JPEG Decode</td>
+		  <td>0.613</td>
+		  <td>0.536</td>
+		  <td>0.454</td>
+		  <td>0.465</td>
+		  <td>0.475</td>
+		  <td>0.498</td>
+		  <td>0.414</td>
+		</tr>
+		<tr>
+		  <td>Sobel Filter</td>
+		  <td>0.503</td>
+		  <td>0.339</td>
+		  <td>0.256</td>
+		  <td>0.208</td>
+		  <td>0.177</td>
+		  <td>0.156</td>
+		  <td>0.141</td>
+		</tr>
+		<tr>
+		  <td>DES</td>
+		  <td>0.503</td>
+		  <td>0.345</td>
+		  <td>0.262</td>
+		  <td>0.215</td>
+		  <td>0.187</td>
+		  <td>0.156</td>
+		  <td>0.140</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+	</p>
+      </div>
+    </p>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix I</span>
+      <br />UML Creation Results
+    </h2>
+
+    <p class="noindent" >
+      User events logged while generating UML benchmarks for various architectural specifications.
+      Both user events, as described in Chapter 6, and time are included. Percentages are shown relative
+      to the figures extracted for the creation of the base model and show the amount of extra work
+      required to modify the UML model to fully utilise the underlying architecture. Although a similar
+      trend is seen between the time and user events the reason for the different in percentage of time to
+      generate the base model is due to the user events only logging a single keyboard event when
+      inputting action code into an operation which, depending on the size of the operation, could take
+      many seconds.
+      <div class="table">
+	<p class="indent" >
+
+          <div class="caption">
+	    <span class="id">Table I.1: </span>
+	    <span class="content">
+	      Statistics generated from generation of multiple Mandelbrot Set UML models
+	      using RoundRobin design, includes both User Events and Time Taken.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th>Configuration</th>
+		  <th>User Events</th>
+		  <th>Time(Seconds)</th>
+		  <th>User Events (%)</th>
+		  <th>Time (%)</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Base</td>
+		  <td>630</td>
+		  <td>1905</td>
+		  <td>100</td>
+		  <td>100</td>
+		</tr>
+		<tr>
+		  <td>3 Core</td>
+		  <td>142</td>
+		  <td>74</td>
+		  <td>23</td>
+		  <td>4</td>
+		</tr>
+		<tr>
+		  <td>4 Core</td>
+		  <td>440</td>
+		  <td>521</td>
+		  <td>70</td>
+		  <td>27</td>
+		</tr>
+		<tr>
+		  <td>5 Core</td>
+		  <td>571</td>
+		  <td>656</td>
+		  <td>91</td>
+		  <td>34</td>
+		</tr>
+		<tr>
+		  <td>6 Core</td>
+		  <td>655</td>
+		  <td>668</td>
+		  <td>104</td>
+		  <td>35</td>
+		</tr>
+		<tr>
+		  <td>7 Core</td>
+		  <td>662</td>
+		  <td>743</td>
+		  <td>105</td>
+		  <td>39</td>
+		</tr>
+		<tr>
+		  <td>8 Core</td>
+		  <td>740</td>
+		  <td>826</td>
+		  <td>117</td>
+		  <td>43</td>
+		</tr>
+		<tr>
+		  <td>Wildcard</td>
+		  <td>159</td>
+		  <td>97</td>
+		  <td>25</td>
+		  <td>5</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+          <div class="caption">
+	    <span class="id">Table I.2: </span>
+	    <span class="content">
+	      Statistics generated from generation of multiple Mandelbrot Set UML models
+	      using Split design, includes both User Events and Time Taken.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th>Configuration</th>
+		  <th>User Events</th>
+		  <th>Time(Seconds)</th>
+		  <th>User Events (%)</th>
+		  <th>Time (%)</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Base</td>
+		  <td>593</td>
+		  <td>1776</td>
+		  <td>100</td>
+		  <td>100</td>
+		</tr>
+		<tr>
+		  <td>3 Core</td>
+		  <td>152</td>
+		  <td>63</td>
+		  <td>26</td>
+		  <td>4</td>
+		</tr>
+		<tr>
+		  <td>4 Core</td>
+		  <td>293</td>
+		  <td>209</td>
+		  <td>49</td>
+		  <td>12</td>
+		</tr>
+		<tr>
+		  <td>5 Core</td>
+		  <td>339</td>
+		  <td>274</td>
+		  <td>57</td>
+		  <td>15</td>
+		</tr>
+		<tr>
+		  <td>6 Core</td>
+		  <td>395</td>
+		  <td>342</td>
+		  <td>67</td>
+		  <td>19</td>
+		</tr>
+		<tr>
+		  <td>7 Core</td>
+		  <td>507</td>
+		  <td>414</td>
+		  <td>85</td>
+		  <td>23</td>
+		</tr>
+		<tr>
+		  <td>8 Core</td>
+		  <td>564</td>
+		  <td>463</td>
+		  <td>95</td>
+		  <td>26</td>
+		</tr>
+		<tr>
+		  <td>Wildcard</td>
+		  <td>167</td>
+		  <td>85</td>
+		  <td>28</td>
+		  <td>5</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+          <div class="caption">
+	    <span class="id">Table I.3: </span>
+	    <span class="content">
+	      Statistics generated from generation of multiple Sobel Filter UML models using
+	      RoundRobin design, includes both User Events and Time Taken.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th>Configuration</th>
+		  <th>User Events</th>
+		  <th>Time(Seconds)</th>
+		  <th>User Events (%)</th>
+		  <th>Time (%)</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Base</td>
+		  <td>534</td>
+		  <td>1146</td>
+		  <td>100</td>
+		  <td>100</td>
+		</tr>
+		<tr>
+		  <td>3 Core</td>
+		  <td>152</td>
+		  <td>69</td>
+		  <td>28</td>
+		  <td>6</td>
+		</tr>
+		<tr>
+		  <td>4 Core</td>
+		  <td>432</td>
+		  <td>538</td>
+		  <td>81</td>
+		  <td>47</td>
+		</tr>
+		<tr>
+		  <td>5 Core</td>
+		  <td>477</td>
+		  <td>612</td>
+		  <td>89</td>
+		  <td>53</td>
+		</tr>
+		<tr>
+		  <td>6 Core</td>
+		  <td>531</td>
+		  <td>698</td>
+		  <td>99</td>
+		  <td>61</td>
+		</tr>
+		<tr>
+		  <td>7 Core</td>
+		  <td>637</td>
+		  <td>795</td>
+		  <td>119</td>
+		  <td>69</td>
+		</tr>
+		<tr>
+		  <td>8 Core</td>
+		  <td>708</td>
+		  <td>860</td>
+		  <td>133</td>
+		  <td>75</td>
+		</tr>
+		<tr>
+		  <td>Wildcard</td>
+		  <td>166</td>
+		  <td>96</td>
+		  <td>31</td>
+		  <td>8</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+          <div class="caption">
+	    <span class="id">Table I.4: </span>
+	    <span class="content">
+	      Statistics generated from generation of multiple Sobel Filter UML models using
+	      Split design, includes both User Events and Time Taken.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th>Configuration</th>
+		  <th>User Events</th>
+		  <th>Time(Seconds)</th>
+		  <th>User Events (%)</th>
+		  <th>Time (%)</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Base</td>
+		  <td>508</td>
+		  <td>1231</td>
+		  <td>100</td>
+		  <td>100</td>
+		</tr>
+		<tr>
+		  <td>3 Core</td>
+		  <td>156</td>
+		  <td>58</td>
+		  <td>31</td>
+		  <td>5</td>
+		</tr>
+		<tr>
+		  <td>4 Core</td>
+		  <td>259</td>
+		  <td>213</td>
+		  <td>51</td>
+		  <td>17</td>
+		</tr>
+		<tr>
+		  <td>5 Core</td>
+		  <td>372</td>
+		  <td>289</td>
+		  <td>73</td>
+		  <td>23</td>
+		</tr>
+		<tr>
+		  <td>6 Core</td>
+		  <td>426</td>
+		  <td>341</td>
+		  <td>84</td>
+		  <td>28</td>
+		</tr>
+		<tr>
+		  <td>7 Core</td>
+		  <td>477</td>
+		  <td>395</td>
+		  <td>94</td>
+		  <td>32</td>
+		</tr>
+		<tr>
+		  <td>8 Core</td>
+		  <td>611</td>
+		  <td>499</td>
+		  <td>120</td>
+		  <td>41</td>
+		</tr>
+		<tr>
+		  <td>Wildcard</td>
+		  <td>166</td>
+		  <td>77</td>
+		  <td>33</td>
+		  <td>6</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+          <div class="caption">
+	    <span class="id">Table I.5: </span>
+	    <span class="content">
+	      Statistics generated from generation of multiple DES Encryption UML models
+	      using RoundRobin design, includes both User Events and Time Taken.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th>Configuration</th>
+		  <th>User Events</th>
+		  <th>Time(Seconds)</th>
+		  <th>User Events (%)</th>
+		  <th>Time (%)</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Base</td>
+		  <td>1041</td>
+		  <td>2882</td>
+		  <td>100</td>
+		  <td>100</td>
+		</tr>
+		<tr>
+		  <td>3 Core</td>
+		  <td>148</td>
+		  <td>93</td>
+		  <td>14</td>
+		  <td>3</td>
+		</tr>
+		<tr>
+		  <td>4 Core</td>
+		  <td>553</td>
+		  <td>711</td>
+		  <td>53</td>
+		  <td>25</td>
+		</tr>
+		<tr>
+		  <td>5 Core</td>
+		  <td>584</td>
+		  <td>686</td>
+		  <td>56</td>
+		  <td>24</td>
+		</tr>
+		<tr>
+		  <td>6 Core</td>
+		  <td>722</td>
+		  <td>761</td>
+		  <td>69</td>
+		  <td>26</td>
+		</tr>
+		<tr>
+		  <td>7 Core</td>
+		  <td>803</td>
+		  <td>863</td>
+		  <td>77</td>
+		  <td>30</td>
+		</tr>
+		<tr>
+		  <td>8 Core</td>
+		  <td>766</td>
+		  <td>889</td>
+		  <td>74</td>
+		  <td>31</td>
+		</tr>
+		<tr>
+		  <td>Wildcard</td>
+		  <td>161</td>
+		  <td>123</td>
+		  <td>15</td>
+		  <td>4</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+
+          <div class="caption">
+	    <span class="id">Table I.6: </span>
+	    <span class="content">
+	      Statistics generated from generation of multiple DES Encryption UML models
+	      using Split design, includes both User Events and Time Taken.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th>Configuration</th>
+		  <th>User Events</th>
+		  <th>Time(Seconds)</th>
+		  <th>User Events (%)</th>
+		  <th>Time (%)</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Base</td>
+		  <td>1030</td>
+		  <td>2698</td>
+		  <td>100</td>
+		  <td>100</td>
+		</tr>
+		<tr>
+		  <td>3 Core</td>
+		  <td>158</td>
+		  <td>65</td>
+		  <td>15</td>
+		  <td>2</td>
+		</tr>
+		<tr>
+		  <td>4 Core</td>
+		  <td>296</td>
+		  <td>278</td>
+		  <td>29</td>
+		  <td>10</td>
+		</tr>
+		<tr>
+		  <td>5 Core</td>
+		  <td>409</td>
+		  <td>320</td>
+		  <td>40</td>
+		  <td>12</td>
+		</tr>
+		<tr>
+		  <td>6 Core</td>
+		  <td>424</td>
+		  <td>378</td>
+		  <td>41</td>
+		  <td>14</td>
+		</tr>
+		<tr>
+		  <td>7 Core</td>
+		  <td>522</td>
+		  <td>441</td>
+		  <td>51</td>
+		  <td>16</td>
+		</tr>
+		<tr>
+		  <td>8 Core</td>
+		  <td>579</td>
+		  <td>506</td>
+		  <td>56</td>
+		  <td>19</td>
+		</tr>
+		<tr>
+		  <td>Wildcard</td>
+		  <td>157</td>
+		  <td>79</td>
+		  <td>15</td>
+		  <td>3</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+
+	  <br />
+	</p>
+      </div>
+    </p>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix J</span>
+      <br />UML Execution Results
+    </h2>
+    <div class="table">
+      <p class="indent" >
+
+	<div class="caption">
+	  <span class="id">Table J.1: </span>
+	  <span class="content">
+	    Cycle counts of UML models generated to match specific architectural templates
+	    executed on LE1 architecture.
+	  </span>
+	</div>
+
+	<div class="tabular">
+	  <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Benchmark</th>
+		  <th rowspan="2">Type</th>
+		  <th colspan="6">Cores</th>
+		</tr>
+		<tr>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Mandelbrot Set</td>
+		  <td>RoundRobin</td>
+		  <td>4538352</td>
+		  <td>2654619</td>
+		  <td>1939050</td>
+		  <td>1681681</td>
+		  <td>1455082</td>
+		  <td>1392839</td>
+		</tr>
+		<tr>
+		  <td>Sobel Filter</td>
+		  <td>RoundRobin</td>
+		  <td>1577150</td>
+		  <td>1188667</td>
+		  <td>921733</td>
+		  <td>879257</td>
+		  <td>868846</td>
+		  <td>853038</td>
+		</tr>
+		<tr>
+		  <td>DES Encryption</td>
+		  <td>RoundRobin</td>
+		  <td>4843018</td>
+		  <td>2788196</td>
+		  <td>1866686</td>
+		  <td>1529151</td>
+		  <td>1294099</td>
+		  <td>1260854</td>
+		</tr>
+		<tr>
+		  <td>Mandelbrot Set</td>
+		  <td>Spit</td>
+		  <td>1794543</td>
+		  <td>877295</td>
+		  <td>467779</td>
+		  <td>320965</td>
+		  <td>357554</td>
+		  <td>177271</td>
+		</tr>
+		<tr>
+		  <td>Sobel Filter</td>
+		  <td>Split</td>
+		  <td>560801</td>
+		  <td>280528</td>
+		  <td>184188</td>
+		  <td>134998</td>
+		  <td>105662</td>
+		  <td>85576</td>
+		</tr>
+		<tr>
+		  <td>DES Encryption</td>
+		  <td>Split</td>
+		  <td>4060537</td>
+		  <td>2035662</td>
+		  <td>1426747</td>
+		  <td>1078019</td>
+		  <td>874280</td>
+		  <td>625565</td>
+		</tr>
+	      </tbody>
+	    </table>
+	</div>
+
+	<br />
+
+	<div class="caption">
+	  <span class="id">Table J.2:  </span>
+	  <span class="content">
+	    Cycle  counts  of  UML  models  generated  using  wildcard  UML  notation  and
+	    modified to fit alternative architectural template executed on LE1 architecture.
+	  </span>
+	</div>
+
+	<div class="tabular">
+	  <table>
+	      <thead>
+		<tr>
+		  <th rowspan="2">Benchmark</th>
+		  <th rowspan="2">Type</th>
+		  <th colspan="6">Cores</th>
+		</tr>
+		<tr>
+		  <th>3</th>
+		  <th>4</th>
+		  <th>5</th>
+		  <th>6</th>
+		  <th>7</th>
+		  <th>8</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Mandelbrot Set</td>
+		  <td>RoundRobin</td>
+		  <td>5040311</td>
+		  <td>2638241</td>
+		  <td>1952824</td>
+		  <td>1643023</td>
+		  <td>1469923</td>
+		  <td>1389665</td>
+		</tr>
+		<tr>
+		  <td>Sobel Filter</td>
+		  <td>RoundRobin</td>
+		  <td>1971750</td>
+		  <td>1189263</td>
+		  <td>919126</td>
+		  <td>879713</td>
+		  <td>869684</td>
+		  <td>876498</td>
+		</tr>
+		<tr>
+		  <td>DES Encryption</td>
+		  <td>RoundRobin</td>
+		  <td>5436725</td>
+		  <td>2782548</td>
+		  <td>1826698</td>
+		  <td>1450682</td>
+		  <td>1385417</td>
+		  <td>1179274</td>
+		</tr>
+		<tr>
+		  <td>Mandelbrot Set</td>
+		  <td>Spit</td>
+		  <td>1808716</td>
+		  <td>941848</td>
+		  <td>954158</td>
+		  <td>689650</td>
+		  <td>674658</td>
+		  <td>615068</td>
+		</tr>
+		<tr>
+		  <td>Sobel Filter</td>
+		  <td>Split</td>
+		  <td>569226</td>
+		  <td>290232</td>
+		  <td>188369</td>
+		  <td>138354</td>
+		  <td>166561</td>
+		  <td>88928</td>
+		</tr>
+		<tr>
+		  <td>DES Encryption</td>
+		  <td>Split</td>
+		  <td>4199028</td>
+		  <td>2109589</td>
+		  <td>1480685</td>
+		  <td>1132517</td>
+		  <td>938412</td>
+		  <td>829370</td>
+		</tr>
+	      </tbody>
+	    </table>
+	</div>
+
+      </p>
+    </div>
+
+  </body>
+</html>
