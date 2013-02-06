@@ -23,11 +23,11 @@
         <span class="cmr-12">Doctor of Philosophy of Loughborough University</span>
 	<br />
 	<br />
-        <span class="cmsy-10x-x-120">© </span>
+        <span class="cmsy-10x-x-120">©</span>
 	<span class="cmr-12">David Stevens 2013</span>
 	<br />
 	<br />
-        <span class="cmr-12">January 2013</span>
+        <span class="cmr-12">February 2013</span>
       </div>
     </div>
 
@@ -613,6 +613,212 @@
     <h2 class="appendixHead">
       <span class="titlemark">Appendix D</span>
       <br />
+      LE1 Assembler
+    </h2>
+
+    <p class="noindent" >
+      The LE1 Assembler used to translate the assembly output from VEX to match the LE1 ISA.
+      It is formed of a selection of scripts and library code to perform this translation and produce LE1 machine code from running a single script.
+
+      An diagram of LE1 Assembler scripts is shown in Figure <a href="#x1-1210011">D.1</a>.
+    </p>
+
+    <h3 class="sectionHead">
+      <a href="https://github.com/david-stevens/LE1/archive/master.zip" target="_blank">
+	<p class="titlemark">Download .zip</p>
+      </a>
+      <a href="https://github.com/david-stevens/LE1/tree/master/Assembler" target="_blank">
+	<p class="titlemark">View on github.com</p>
+      </a>
+    </h3>
+
+    <p class="indent" >
+      <a id="x1-1210011"></a>
+      <div class="figure" >
+	<p class="noindent" >
+	  <img src="img/le1_orch.png" alt="PIC">
+	  <br />
+	  <div class="caption">
+	    <span class="id">Figure D.1: </span>
+	    <span class="content">LE1 Assembler scripts orchestration.</span>
+	  </div>
+	</p>
+      </div>
+    </p>
+
+    <p>
+      <hr />
+    </p>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix E</span>
+      <br />
+      Insizzle
+    </h2>
+    <p class="noindent" >
+      Insizzle is the LE1 VLIW CMP interpreted instruction set simulator.
+      Insizzle provides cycle accurate simulation of the LE1 hardware implementation.
+    </p>
+
+    <p class="noindent" >
+      There are two modes of simulation which match the different experiment executions performed throughout the thesis:
+    </p>
+    <p class="noindent" >
+      A) PThread mode: A single context begins execution, all other are able to have threads created on them.
+      <br/>
+      B) CPUID mode: All contexts in the system begin execution from entry point of the application.
+    </p>
+
+    <p class="noindent" >
+      The argument list for Insizzle are shown in Table <a href="#x1-1220011">E.1</a> and the heuristics produced after successful execution are explained in Table <a href="#x1-1220012">E.2</a>.
+    </p>
+
+    <h3 class="sectionHead">
+      <a href="https://github.com/david-stevens/LE1/archive/master.zip" target="_blank">
+	<p class="titlemark">Download .zip</p>
+      </a>
+      <a href="https://github.com/david-stevens/LE1/tree/master/Insizzle" target="_blank">
+	<p class="titlemark">View on github.com</p>
+      </a>
+    </h3>
+
+    <div class="table">
+      <p class="indent" >
+	<a  id="x1-1220011"></a>
+	<div class="float">
+	  <div class="caption">
+	    <span class="id">Table&#x00A0;E.1: </span>
+	    <span class="content">
+	      Insizzle arguments for LE1 Instruction Set Simulator.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th>Argument</th>
+		  <th>Description</th>
+		  <th>Required</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>model.xml</td>
+		  <td>LE1 XML configuration file</td>
+		  <td>True</td>
+		</tr>
+		<tr>
+		  <td>-similarIRAM</td>
+		  <td>In a multi-context system all instruction RAMS are filled with iram0.bin</td>
+		  <td>False</td>
+		</tr>
+		<tr>
+		  <td>-stack=%d</td>
+		  <td>During execution there may be stack size warnings, it is possible to set the stack sizes at command line lever rather than editing the machine model</td>
+		  <td>False</td>
+		</tr>
+		<tr>
+		  <td>-printout</td>
+		  <td>Displays all instructions being executed along with inputs and outputs (Produces a lot of data)</td>
+		  <td>False</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+	</div>
+      </p>
+    </div>
+
+    <div class="table">
+      <p class="indent" >
+	<a id="x1-1220012"></a>
+	<div class="float">
+	  <div class="caption">
+	    <span class="id">Table&#x00A0;E.2: </span>
+	    <span class="content">
+	      Description of heuristics from Insizzle Execution.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th>Name</th>
+		  <th>Description</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Start Time</td>
+		  <td>Timestamp of when Insizzle began execution</td>
+		</tr>
+		<tr>
+		  <td>End Time</td>
+		  <td>Timestamp of when Insizzle completed execution</td>
+		</tr>
+		<tr>
+		  <td>Total Time</td>
+		  <td>Time in seconds taken for Insizzle to complete execution on host machine</td>
+		</tr>
+		<tr>
+		  <td colspan="2">Per Hypercontext</td>
+		</tr>
+		<tr>
+		  <td>cycleCount</td>
+		  <td>Total number of cycles since 0 before HALT operation was executed</td>
+		</tr>
+		<tr>
+		  <td>stallCount</td>
+		  <td>Number of cycles where the hypercontext was stalled due to pipe refills, memory access, etc.</td>
+		</tr>
+		<tr>
+		  <td>nopCount</td>
+		  <td>Number of No-Ops executed</td>
+		</tr>
+		<tr>
+		  <td>idleCount</td>
+		  <td>In pthread mode the number of cycles waiting on other hypercontext (pthread_join)</td>
+		</tr>
+		<tr>
+		  <td>bundleCount[ARRAY]</td>
+		  <td>Total cycle count broken down into bundle counts</td>
+		</tr>
+		<tr>
+		  <td>decodeStallCount</td>
+		  <td>Number of cycles stalled due to instruction decoding stalls</td>
+		</tr>
+		<tr>
+		  <td>branchTaken</td>
+		  <td>Number of branches taken</td>
+		</tr>
+		<tr>
+		  <td>branchNotTaken</td>
+		  <td>Number of branches not taken</td>
+		</tr>
+		<tr>
+		  <td>controlFlowChange</td>
+		  <td>Number of times control flow was altered due to call, branch, goto</td>
+		</tr>
+		<tr>
+		  <td>memoryAccessCount</td>
+		  <td>Number of cycles stalled due to memory conflicts</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+	</div>
+      </p>
+    </div>
+
+    <p>
+      <hr />
+    </p>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix F</span>
+      <br />
       LE1 API available within Microblaze
     </h2>
     The set_cpu() function sets the control registers within the LE1 to match those defined in &#8217;current&#8217;. &#8217;current&#8217; is a structure containing
@@ -753,7 +959,7 @@
     </p>
 
     <h2 class="appendixHead">
-      <span class="titlemark">Appendix E</span>
+      <span class="titlemark">Appendix G</span>
       <br />Leon3MP SMT Modifications
     </h2>
     This section includes the Assembly and C code
@@ -821,7 +1027,7 @@
     </p>
 
     <h2 class="appendixHead">
-      <span class="titlemark">Appendix F</span>
+      <span class="titlemark">Appendix H</span>
       <br />
       X11 User Interaction Capture
     </h2>
@@ -868,7 +1074,7 @@
     </p>
 
     <h2 class="appendixHead">
-      <span class="titlemark">Appendix G</span>
+      <span class="titlemark">Appendix I</span>
       <br />PThread Execution Results
     </h2>
 
@@ -879,7 +1085,7 @@
         <p class="indent" >
 
           <div class="caption">
-	    <span class="id">Table G.1: </span>
+	    <span class="id">Table I.1: </span>
 	    <span class="content">
 	      Execution of Mandelbrot Set threading using coarse grain PThread operations on available architectures.
 	    </span>
@@ -976,7 +1182,7 @@
 
 	  <br />
 	  <div class="caption">
-	    <span class="id">Table G.2: </span>
+	    <span class="id">Table I.2: </span>
 	    <span class="content">
 	      Execution of Mandelbrot Set threading using fine grain PThread operations on available architectures.
 	    </span>
@@ -1164,7 +1370,7 @@
 	  <br />
 
 	  <div class="caption">
-	    <span class="id">Table G.4: </span>
+	    <span class="id">Table I.4: </span>
 	    <span class="content">
 	      Fine grain Mandelbrot Set execution speed up relative to execution on a single
 	      core/CPU.
@@ -1254,7 +1460,7 @@
 	  <br />
 
 	  <div class="caption">
-	    <span class="id">Table G.5: </span>
+	    <span class="id">Table I.5: </span>
 	    <span class="content">
 	      Execution of JPEG Decode threading using coarse grain PThread operations on available architectures.
 	    </span>
@@ -1329,7 +1535,7 @@
 	  <br />
 
 	  <div class="caption">
-	    <span class="id">Table G.6: </span>
+	    <span class="id">Table I.6: </span>
 	    <span class="content">
 	      Execution of JPEG Decode threading using fine grain PThread operations on available architectures.
 	    </span>
@@ -1405,7 +1611,7 @@
 
 
 	  <div class="caption">
-	    <span class="id">Table G.7: </span>
+	    <span class="id">Table I.7: </span>
 	    <span class="content">
 	      Coarse grain JPEG Decode execution speed up relative to execution on a single
 	      core/CPU.
@@ -1476,7 +1682,7 @@
 	  <br />
 
 	  <div class="caption">
-	    <span class="id">Table G.8: </span>
+	    <span class="id">Table I.8: </span>
 	    <span class="content">
 	      Fine grain JPEG Decode execution speed up relative to execution on a single
 	      core/CPU.
@@ -1547,7 +1753,7 @@
 	  <br />
 
 	  <div class="caption">
-	    <span class="id">Table G.9: </span>
+	    <span class="id">Table I.9: </span>
 	    <span class="content">
 	      Execution of Sobel Filter threading using coarse grain PThread operations on available architectures.
 	    </span>
@@ -1622,7 +1828,7 @@
 	  <br />
 
 	  <div class="caption">
-	    <span class="id">Table G.10: </span>
+	    <span class="id">Table I.10: </span>
 	    <span class="content">
 	      Execution of Sobel Filter threading using fine grain PThread operations on available architectures.
 	    </span>
@@ -1697,7 +1903,7 @@
 	  <br />
 
 	  <div class="caption">
-	    <span class="id">Table G.11: </span>
+	    <span class="id">Table I.11: </span>
 	    <span class="content">
 	      Coarse grain Sobel Filter execution speed up relative to execution on a single
 	      core/CPU.
@@ -1767,7 +1973,7 @@
 	  <br />
 
 	  <div class="caption">
-	    <span class="id">Table G.12: </span>
+	    <span class="id">Table I.12: </span>
 	    <span class="content">
 	      Fine grain Sobel Filter execution speed up relative to execution on a single
 	      core/CPU.
@@ -1838,7 +2044,7 @@
 	  <br />
 
 	  <div class="caption">
-	    <span class="id">Table G.13: </span>
+	    <span class="id">Table I.13: </span>
 	    <span class="content">
 	      Execution of DES Encryption threading using coarse grain PThread operations on available architectures.
 	    </span>
@@ -1913,7 +2119,7 @@
 	  <br />
 
 	  <div class="caption">
-	    <span class="id">Table G.14: </span>
+	    <span class="id">Table I.14: </span>
 	    <span class="content">
 	      Execution of DES Encryption threading using fine grain PThread operations on available architectures.
 	    </span>
@@ -1989,7 +2195,7 @@
 
 
 	  <div class="caption">
-	    <span class="id">Table G.15: </span>
+	    <span class="id">Table I.15: </span>
 	    <span class="content">
 	      Coarse grain DES Encryption execution speed up relative to execution on a
 	      single core/CPU.
@@ -2060,7 +2266,7 @@
 	  <br />
 
 	  <div class="caption">
-	    <span class="id">Table G.16: </span>
+	    <span class="id">Table I.16: </span>
 	    <span class="content">
 	      Fine grain DES Encryption execution speed up relative to execution on a single
 	      core/CPU.
@@ -2138,7 +2344,7 @@
     </p>
 
     <h2 class="appendixHead">
-      <span class="titlemark">Appendix H</span>
+      <span class="titlemark">Appendix J</span>
       <br />
       CPUID Execution Results
     </h2>
@@ -2150,7 +2356,7 @@
       <div class="table">
 	<p class="indent" >
           <div class="caption">
-	    <span class="id">Table H.1: </span>
+	    <span class="id">Table J.1: </span>
 	    <span class="content">
 	      Cycle counts of all benchmarks executing on the LE1 using CPUID to perform parallelism within the applications.
 	    </span>
@@ -2226,7 +2432,7 @@
 	  <br />
 
           <div class="caption">
-	    <span class="id">Table H.2: </span>
+	    <span class="id">Table J.2: </span>
 	    <span class="content">
 	      Cycle counts of all benchmarks executing on the Leon3MP using CPUID to perform parallelism within the applications.
 	    </span>
@@ -2302,7 +2508,7 @@
 	  <br />
 
           <div class="caption">
-	    <span class="id">Table H.3: </span>
+	    <span class="id">Table J.3: </span>
 	    <span class="content">
 	      Speed up of benchmarks on the LE1 using CPUID to perform parallelism,
 	      relative to execution on a single core.
@@ -2374,7 +2580,7 @@
 	  <br />
 
           <div class="caption">
-	    <span class="id">Table H.4: </span>
+	    <span class="id">Table J.4: </span>
 	    <span class="content">
 	      Speed up of benchmarks on the Leon3MP using CPUID to perform parallelism,
 	      relative to execution on a single CPU.
@@ -2453,7 +2659,7 @@
     </p>
 
     <h2 class="appendixHead">
-      <span class="titlemark">Appendix I</span>
+      <span class="titlemark">Appendix K</span>
       <br />UML Creation Results
     </h2>
 
@@ -2470,7 +2676,7 @@
 	<p class="indent" >
 
           <div class="caption">
-	    <span class="id">Table I.1: </span>
+	    <span class="id">Table K.1: </span>
 	    <span class="content">
 	      Statistics generated from generation of multiple Mandelbrot Set UML models
 	      using RoundRobin design, includes both User Events and Time Taken.
@@ -2552,7 +2758,7 @@
 	  <br />
 
           <div class="caption">
-	    <span class="id">Table I.2: </span>
+	    <span class="id">Table K.2: </span>
 	    <span class="content">
 	      Statistics generated from generation of multiple Mandelbrot Set UML models
 	      using Split design, includes both User Events and Time Taken.
@@ -2634,7 +2840,7 @@
 	  <br />
 
           <div class="caption">
-	    <span class="id">Table I.3: </span>
+	    <span class="id">Table K.3: </span>
 	    <span class="content">
 	      Statistics generated from generation of multiple Sobel Filter UML models using
 	      RoundRobin design, includes both User Events and Time Taken.
@@ -2716,7 +2922,7 @@
 	  <br />
 
           <div class="caption">
-	    <span class="id">Table I.4: </span>
+	    <span class="id">Table K.4: </span>
 	    <span class="content">
 	      Statistics generated from generation of multiple Sobel Filter UML models using
 	      Split design, includes both User Events and Time Taken.
@@ -2798,7 +3004,7 @@
 	  <br />
 
           <div class="caption">
-	    <span class="id">Table I.5: </span>
+	    <span class="id">Table K.5: </span>
 	    <span class="content">
 	      Statistics generated from generation of multiple DES Encryption UML models
 	      using RoundRobin design, includes both User Events and Time Taken.
@@ -2880,7 +3086,7 @@
 	  <br />
 
           <div class="caption">
-	    <span class="id">Table I.6: </span>
+	    <span class="id">Table K.6: </span>
 	    <span class="content">
 	      Statistics generated from generation of multiple DES Encryption UML models
 	      using Split design, includes both User Events and Time Taken.
@@ -2969,14 +3175,14 @@
     </p>
 
     <h2 class="appendixHead">
-      <span class="titlemark">Appendix J</span>
+      <span class="titlemark">Appendix L</span>
       <br />UML Execution Results
     </h2>
     <div class="table">
       <p class="indent" >
 
 	<div class="caption">
-	  <span class="id">Table J.1: </span>
+	  <span class="id">Table L.1: </span>
 	  <span class="content">
 	    Cycle counts of UML models generated to match specific architectural templates
 	    executed on LE1 architecture.
@@ -3068,7 +3274,7 @@
 	<br />
 
 	<div class="caption">
-	  <span class="id">Table J.2:  </span>
+	  <span class="id">Table L.2:  </span>
 	  <span class="content">
 	    Cycle  counts  of  UML  models  generated  using  wildcard  UML  notation  and
 	    modified to fit alternative architectural template executed on LE1 architecture.
