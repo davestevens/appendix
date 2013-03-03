@@ -27,12 +27,398 @@
 	<span class="cmr-12">David Stevens 2013</span>
 	<br />
 	<br />
-        <span class="cmr-12">February 2013</span>
+        <span class="cmr-12">March 2013</span>
       </div>
     </div>
 
     <h2 class="appendixHead">
-      <span class="titlemark">Appendix A
+      <span class="titlemark">Appendix A</span>
+      <br />
+      LE1 XML Config File
+    </h2>
+    LE1 XML Configuration File.
+    <br class="newline" />
+    XML file for configuring hardware and software sections of the LE1 tool collection.
+
+    <h3 class="sectionHead">
+      <a href="https://github.com/davestevens/LE1XML/blob/master/LE1.xml" target="_blank">
+	<span class="titlemark">Download</span>
+      </a>
+    </h3>
+
+    <p class="noindent" >
+      <a href="https://github.com/davestevens/LE1XML/blob/master/LE1.xml" target="_blank">
+      <span class="cmbx-10">LE1.xml</span>
+      </a>
+      <br class="newline" />
+      Two context, homogeneous LE1 system.
+    </p>
+
+    <h3 class="sectionHead">
+      <a href="https://github.com/davestevens/LE1XML/archive/master.zip" target="_blank">
+	<p class="titlemark">Download .zip</p>
+      </a>
+      <a href="https://github.com/davestevens/LE1XML" target="_blank">
+	<p class="titlemark">View on github.com</p>
+      </a>
+    </h3>
+
+    <p>
+      <hr />
+    </p>
+
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix B</span>
+      <br />
+      LE1 API available within Microblaze
+    </h2>
+    The set_cpu() function sets the control registers within the LE1 to match those defined in &#8217;current&#8217;. &#8217;current&#8217; is a structure containing
+
+    <div class="lstlisting" id="listing-10"><span class="label"><a id="x1-118001r1"></a></span><span class="cmr-8">typedef</span><span class="cmr-8"> </span><span class="cmr-8">struct</span><span class="cmr-8"> </span><span class="cmsy-8">{</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118002r2"></a></span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">sys</span><span class="cmr-8">;</span><span class="cmr-8"> </span><span class="cmr-8">/</span><span class="cmsy-8">*</span><span class="cmr-8"> </span><span class="cmr-8">system</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">/</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118003r3"></a></span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">c</span><span class="cmr-8">;</span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">/</span><span class="cmsy-8">*</span><span class="cmr-8"> </span><span class="cmr-8">context</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">/</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118004r4"></a></span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">hc</span><span class="cmr-8">;</span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">/</span><span class="cmsy-8">*</span><span class="cmr-8"> </span><span class="cmr-8">hypercontext</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">/</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118005r5"></a></span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">cl</span><span class="cmr-8">;</span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">/</span><span class="cmsy-8">*</span><span class="cmr-8"> </span><span class="cmr-8">cluster</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">/</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118006r6"></a></span><span class="cmsy-8">}</span><span class="cmr-8"> </span><span class="cmr-8">currentT</span><span class="cmr-8">;</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118007r7"></a></span><span class="cmr-8">currentT</span><span class="cmr-8"> </span><span class="cmr-8">current</span><span class="cmr-8">;</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118008r8"></a></span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118009r9"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118010r10"></a></span><span class="cmr-8">set</span><span class="cmr-8">_cpu</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">currentT</span><span class="cmr-8"> </span><span class="cmr-8">current</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+
+    </div>
+    <p class="indent" >
+      The ctrl_wait() function polls the CTRL_REG within the current LE1, as specified through the set_cpu() function. A do while loop polls the CTRL_REG and prints each time 1M loops have been performed. (NB: This figure does not give the number of LE1 cycles executed).
+      <div class="lstlisting" id="listing-11"><span class="label"><a id="x1-118011r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118012r2"></a></span><span class="cmr-8">ctrl</span><span class="cmr-8">_wait</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">void</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The load_iram() function takes &#8217;inst_length&#8217; bytes as pointed to by &#8217;instructions&#8217; and
+      populates the LE1 instruction RAM. &#8217;context_id&#8217; is used set the current LE1 being targeted using
+      the set_cpu() function. Instructions are written to the LE1, read back and checked for consistency.
+      If read instruction differs from written instruction an error is printed and the program exits.
+      <div class="lstlisting" id="listing-12"><span class="label"><a id="x1-118013r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118014r2"></a></span><span class="cmr-8">load</span><span class="cmr-8">_iram</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">char</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">instructions</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">inst</span><span class="cmr-8">_length</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">context</span><span class="cmr-8">_id</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The load_dram() function takes &#8217;data_length&#8217; bytes as pointed to by &#8217;data&#8217; and populates
+      the LE1 data RAM. Data items are written to the LE1, read back and checked for
+      consistency. If read data item differs from written instruction an error is printed and the
+      program exits. If &#8217;MEMCHECK&#8217; is specified at compile time the LE1 data RAM not
+      initialised is zeroed out, this is for means of performing a comparison after execution.
+      <div class="lstlisting" id="listing-13"><span class="label"><a  id="x1-118015r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118016r2"></a></span><span class="cmr-8">load</span><span class="cmr-8">_dram</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">char</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">data</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">data</span><span class="cmr-8">_length</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+      </p>
+
+    <p class="indent" >
+      The run_application() function initialises the stack pointer with in the current LE1 specified by
+      &#8217;context_id&#8217; and writes to a control register to start the LE1 executing instructions from the
+      instruction RAM. The stack pointer is calculated using: ((&#8217;mem_top&#8217; - 0x100) - (&#8217;stack_size&#8217; *
+      &#8217;context_id&#8217;)). Where &#8217;mem_top&#8217; is the size of the data RAM within the LE1 and &#8217;stack_size&#8217; is
+      the number of bytes allocated for each contexts stack. This function starts the LE1
+      context and then calls ctrl_wait(), then returns after the LE1 has completed execution.
+
+      <div class="lstlisting" id="listing-14"><span class="label"><a  id="x1-118017r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118018r2"></a></span><span class="cmr-8">run</span><span class="cmr-8">_application</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">context</span><span class="cmr-8">_id</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">mem</span><span class="cmr-8">_top</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">stack</span><span class="cmr-8">_size</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The get_max_context() function performs a write and then read back to all LE1 instruction
+      RAMs to compute the number of valid LE1 contexts in the current system.
+      <br class="newline" />
+      Returns the number of contexts available within the current LE1 hardware configuration.
+
+      <div class="lstlisting" id="listing-15"><span class="label"><a  id="x1-118019r1"></a></span><span class="cmr-8">int</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118020r2"></a></span><span class="cmr-8">get</span><span class="cmr-8">_max</span><span class="cmr-8">_contexts</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">void</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The ctrl_wait_multicontext() function is similar to ctrl_wait() function except is loops from
+      zero to &#8217;max_context&#8217; until all LE1 context complete execution. <!--l. 149-->
+
+      <div class="lstlisting" id="listing-16"><span class="label"><a  id="x1-118021r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118022r2"></a></span><span class="cmr-8">ctrl</span><span class="cmr-8">_wait</span><span class="cmr-8">_multicontext</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">unsigned</span><span class="cmr-8"> </span><span class="cmr-8">max</span><span class="cmr-8">_context</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The run_application_multicontext() function is similar to the run_application() function
+      except it starts all available LE1 contexts as specified by &#8217;max_context&#8217; and then calls the
+      ctrl_wait_multicontext() function. When all contexts have completed execution the function
+      returns.
+      <div class="lstlisting" id="listing-17"><span class="label"><a  id="x1-118023r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118024r2"></a></span><span class="cmr-8">run</span><span class="cmr-8">_application</span><span class="cmr-8">_multicontext</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">max</span><span class="cmr-8">_contexts</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">mem</span><span class="cmr-8">_top</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">stack</span><span class="cmr-8">_size</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      Available if &#8217;MEMCHECK&#8217; is specified at compile time. This function compares the LE1 data
+      RAM with an array of known correct data RAM which can be produced by the Instruction Set
+      Simulator.
+      <br class="newline" />
+      Returns 0 on completion with zero errors or -1 otherwise.
+
+      <div class="lstlisting" id="listing-18"><span class="label"><a  id="x1-118025r1"></a></span><span class="cmr-8">int</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118026r2"></a></span><span class="cmr-8">check</span><span class="cmr-8">_dram</span><span class="cmr-8">_after</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">void</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The dbg_wr() function simply writes &#8217;wrdata&#8217; to the address specified by &#8217;addr&#8217;.
+
+      <div class="lstlisting" id="listing-19"><span class="label"><a  id="x1-118027r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118028r2"></a></span><span class="cmr-8">dbg</span><span class="cmr-8">_wr</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">addr</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">wrdata</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The dbg_rd() function simply reads from the address specified by &#8217;addr&#8217;.
+      <br class="newline" />
+      Return the value read from the LE1 at address &#8217;addr&#8217;.
+      <div class="lstlisting" id="listing-20"><span class="label"><a  id="x1-118029r1"></a></span><span class="cmr-8">int</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118030r2"></a></span><span class="cmr-8">dbg</span><span class="cmr-8">_rd</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">addr</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The busy_wait() function blocks until the busy register is clear. This is used after reads and
+      writes to ensure data is correct.
+
+      <div class="lstlisting" id="listing-21"><span class="label"><a  id="x1-118031r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118032r2"></a></span><span class="cmr-8">busy</span><span class="cmr-8">_wait</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">void</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The write_special() function writes &#8217;data&#8217; to &#8221;special&#8221; registers within the LE1 space. (For
+      example; the program counter).
+      <div class="lstlisting" id="listing-22"><span class="label"><a  id="x1-118033r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118034r2"></a></span><span class="cmr-8">write</span><span class="cmr-8">_special</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">special</span><span class="cmr-8">_reg</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">data</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The write_cr() function writes &#8217;data&#8217; to the control register specified by &#8217;ctrl_reg&#8217;.
+
+      <div class="lstlisting" id="listing-23"><span class="label"><a  id="x1-118035r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118036r2"></a></span><span class="cmr-8">write</span><span class="cmr-8">_cr</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">ctrl</span><span class="cmr-8">_reg</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">data</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The read_cr() function reads from control space registers specified by &#8217;ctrl_reg&#8217;.
+      <br class="newline" />
+      Return the value of the register specified by &#8217;ctrl_reg&#8217;.
+
+      <div class="lstlisting" id="listing-24"><span class="label"><a  id="x1-118037r1"></a></span><span class="cmr-8">int</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118038r2"></a></span><span class="cmr-8">read</span><span class="cmr-8">_cr</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">ctrl</span><span class="cmr-8">_reg</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p class="indent" >
+      The grp_wr() function directly writes &#8217;wrdata&#8217; to the general purpose register specified by
+      &#8217;reg&#8217;.
+      <div class="lstlisting" id="listing-25"><span class="label"><a  id="x1-118039r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118040r2"></a></span><span class="cmr-8">grp</span><span class="cmr-8">_wr</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">reg</span><span class="cmr-8"> </span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">wrdata</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
+      </div>
+    </p>
+
+    <p>
+      <hr />
+    </p>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix C</span>
+      <br />
+      LE1 Assembler
+    </h2>
+
+    <p class="noindent" >
+      The LE1 Assembler used to translate the assembly output from VEX to match the LE1 ISA.
+      It is formed of a selection of scripts and library code to perform this translation and produce LE1 machine code from running a single script.
+
+      An diagram of LE1 Assembler scripts is shown in Figure <a href="#x1-1210011">C.1</a>.
+    </p>
+
+    <h3 class="sectionHead">
+      <a href="https://github.com/davestevens/LE1/archive/master.zip" target="_blank">
+	<p class="titlemark">Download .zip</p>
+      </a>
+      <a href="https://github.com/davestevens/LE1/tree/master/Assembler" target="_blank">
+	<p class="titlemark">View on github.com</p>
+      </a>
+    </h3>
+
+    <p class="indent" >
+      <a id="x1-1210011"></a>
+      <div class="figure" >
+	<p class="noindent" >
+	  <img src="img/le1_orch.png" alt="PIC">
+	  <br />
+	  <div class="caption">
+	    <span class="id">Figure C.1: </span>
+	    <span class="content">LE1 Assembler scripts orchestration.</span>
+	  </div>
+	</p>
+      </div>
+    </p>
+
+    <p>
+      <hr />
+    </p>
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix D</span>
+      <br />
+      Insizzle
+    </h2>
+    <p class="noindent" >
+      Insizzle is the LE1 VLIW CMP interpreted instruction set simulator.
+      Insizzle provides cycle accurate simulation of the LE1 hardware implementation.
+    </p>
+
+    <p class="noindent" >
+      There are two modes of simulation which match the different experiment executions performed throughout the thesis:
+    </p>
+    <p class="noindent" >
+      A) PThread mode: A single context begins execution, all other are able to have threads created on them.
+      <br/>
+      B) CPUID mode: All contexts in the system begin execution from entry point of the application.
+    </p>
+
+    <p class="noindent" >
+      The argument list for Insizzle are shown in Table <a href="#x1-1220011">D.1</a> and the heuristics produced after successful execution are explained in Table <a href="#x1-1220012">D.2</a>.
+    </p>
+
+    <h3 class="sectionHead">
+      <a href="https://github.com/davestevens/LE1/archive/master.zip" target="_blank">
+	<p class="titlemark">Download .zip</p>
+      </a>
+      <a href="https://github.com/davestevens/LE1/tree/master/Insizzle" target="_blank">
+	<p class="titlemark">View on github.com</p>
+      </a>
+    </h3>
+
+    <div class="table">
+      <p class="indent" >
+	<a  id="x1-1220011"></a>
+	<div class="float">
+	  <div class="caption">
+	    <span class="id">Table&#x00A0;D.1: </span>
+	    <span class="content">
+	      Insizzle arguments for LE1 Instruction Set Simulator.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th>Argument</th>
+		  <th>Description</th>
+		  <th>Required</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>model.xml</td>
+		  <td>LE1 XML configuration file</td>
+		  <td>True</td>
+		</tr>
+		<tr>
+		  <td>-similarIRAM</td>
+		  <td>In a multi-context system all instruction RAMS are filled with iram0.bin</td>
+		  <td>False</td>
+		</tr>
+		<tr>
+		  <td>-stack=%d</td>
+		  <td>During execution there may be stack size warnings, it is possible to set the stack sizes at command line lever rather than editing the machine model</td>
+		  <td>False</td>
+		</tr>
+		<tr>
+		  <td>-printout</td>
+		  <td>Displays all instructions being executed along with inputs and outputs (Produces a lot of data)</td>
+		  <td>False</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+	</div>
+      </p>
+    </div>
+
+    <div class="table">
+      <p class="indent" >
+	<a id="x1-1220012"></a>
+	<div class="float">
+	  <div class="caption">
+	    <span class="id">Table&#x00A0;D.2: </span>
+	    <span class="content">
+	      Description of heuristics from Insizzle Execution.
+	    </span>
+	  </div>
+
+	  <div class="tabular">
+	    <table>
+	      <thead>
+		<tr>
+		  <th>Name</th>
+		  <th>Description</th>
+		</tr>
+	      </thead>
+	      <tbody>
+		<tr>
+		  <td>Start Time</td>
+		  <td>Timestamp of when Insizzle began execution</td>
+		</tr>
+		<tr>
+		  <td>End Time</td>
+		  <td>Timestamp of when Insizzle completed execution</td>
+		</tr>
+		<tr>
+		  <td>Total Time</td>
+		  <td>Time in seconds taken for Insizzle to complete execution on host machine</td>
+		</tr>
+		<tr>
+		  <td colspan="2">Per Hypercontext</td>
+		</tr>
+		<tr>
+		  <td>cycleCount</td>
+		  <td>Total number of cycles since 0 before HALT operation was executed</td>
+		</tr>
+		<tr>
+		  <td>stallCount</td>
+		  <td>Number of cycles where the hypercontext was stalled due to pipe refills, memory access, etc.</td>
+		</tr>
+		<tr>
+		  <td>nopCount</td>
+		  <td>Number of No-Ops executed</td>
+		</tr>
+		<tr>
+		  <td>idleCount</td>
+		  <td>In pthread mode the number of cycles waiting on other hypercontext (pthread_join)</td>
+		</tr>
+		<tr>
+		  <td>bundleCount[ARRAY]</td>
+		  <td>Total cycle count broken down into bundle counts</td>
+		</tr>
+		<tr>
+		  <td>decodeStallCount</td>
+		  <td>Number of cycles stalled due to instruction decoding stalls</td>
+		</tr>
+		<tr>
+		  <td>branchTaken</td>
+		  <td>Number of branches taken</td>
+		</tr>
+		<tr>
+		  <td>branchNotTaken</td>
+		  <td>Number of branches not taken</td>
+		</tr>
+		<tr>
+		  <td>controlFlowChange</td>
+		  <td>Number of times control flow was altered due to call, branch, goto</td>
+		</tr>
+		<tr>
+		  <td>memoryAccessCount</td>
+		  <td>Number of cycles stalled due to memory conflicts</td>
+		</tr>
+	      </tbody>
+	    </table>
+	  </div>
+	</div>
+      </p>
+    </div>
+
+    <p>
+      <hr />
+    </p>
+
+
+    <h2 class="appendixHead">
+      <span class="titlemark">Appendix E
       </span>
       <br />
       Modelling Modification Implementations
@@ -40,7 +426,7 @@
     Methods presented in Chapter 4 which are implemented in Perl are included;
 
     <h3 class="sectionHead">
-      <span class="titlemark">A.1</span>
+      <span class="titlemark">E.1</span>
       Modifiable Architecture
     </h3>
     <p class="noindent" >
@@ -58,7 +444,7 @@
     </p>
 
     <h3 class="sectionHead">
-      <span class="titlemark">A.2</span>
+      <span class="titlemark">E.2</span>
       Modifiable Application
     </h3>
     <p class="noindent" >
@@ -87,7 +473,7 @@
     </p>
 
     <h3 class="sectionHead">
-      <span class="titlemark">A.3</span>
+      <span class="titlemark">E.3</span>
       Modifiable Allocations
     </h3>
     <p class="noindent" >
@@ -99,7 +485,7 @@
     </p>
 
     <h3 class="sectionHead">
-      <span class="titlemark">A.4</span>
+      <span class="titlemark">E.4</span>
       Create Static UML Model
     </h3>
     <p class="noindent" >
@@ -111,7 +497,7 @@
     </p>
 
     <h3 class="sectionHead">
-      <span class="titlemark">A.5</span>
+      <span class="titlemark">E.5</span>
       Miscellaneous
     </h3>
     <p class="noindent" >
@@ -136,7 +522,7 @@
     </p>
 
     <h2 class="appendixHead">
-      <span class="titlemark">Appendix B
+      <span class="titlemark">Appendix F
       </span>
       <br />
       Full Flow Example
@@ -145,18 +531,18 @@
     Set Simulator.
 
     <h3 class="sectionHead">
-      <span class="titlemark">B.1</span>
+      <span class="titlemark">F.1</span>
       UML Model
     </h3>
     <p class="noindent" >
       <a href="https://github.com/davestevens/FullFlow/blob/master/Sobel_roundrobin_wildcard.zip" target="_blank">Download Modelio UML model</a><br/>
       Creation of UML model within Modelio using the UML design notations defined above.
       Example is based on a Sobel Filter UML model. The Class diagram showing the overall
-      behaviour of the model is shown in Figure <a href="#x1-1180011">B.1</a> with the structure of the model shown in
-      Figure <a href="#x1-1180022">B.2</a>. The Class diagram display internal operations, attributes and ports of the classes
+      behaviour of the model is shown in Figure <a href="#x1-1180011">F.1</a> with the structure of the model shown in
+      Figure <a href="#x1-1180022">F.2</a>. The Class diagram display internal operations, attributes and ports of the classes
       along with interfaces and their realisations contained within the model. The Composite
       Structure diagram displays the structure of the system captured in the UML model,
-      Figure <a href="#x1-1180022">B.2</a> displays three objects within a single top level class along with their ports and
+      Figure <a href="#x1-1180022">F.2</a> displays three objects within a single top level class along with their ports and
       connections in the application section of the model. Also shown is the architecture
       section and the mappings between the application and architecture sections. It is in this
       diagram where the UML notations defined within this thesis are included with the &#8217;Sob&#8217;
@@ -171,7 +557,7 @@
 	  <img src="img/full_flow_class.png" alt="PIC">
 	  <br />
 	  <div class="caption">
-	    <span class="id">Figure B.1: </span>
+	    <span class="id">Figure F.1: </span>
 	    <span class="content">Class diagram of Sobel Filer UML model</span>
 	  </div>
 	</p>
@@ -185,7 +571,7 @@
 	  <img src="img/full_flow_comp.png" alt="PIC">
 	  <br />
 	  <div class="caption">
-	    <span class="id">Figure B.2: </span>
+	    <span class="id">Figure F.2: </span>
 	    <span class="content">Composite Structure of Sobel Filter UML model</span>
 	  </div>
 	</p>
@@ -194,13 +580,13 @@
 
     <p class="indent" >
       Classes within the UML model require state machines to define their overall behaviour, these
-      are shown in Figure&#x00A0;<a href="#x1-118003r1">B.3(a)</a>
-      and&#x00A0;<a href="#x1-118004r2">B.3(b)</a>.
-      The Source class state machine is shown in Figure&#x00A0;<a href="#x1-118003r1">B.3(a)</a>
+      are shown in Figure&#x00A0;<a href="#x1-118003r1">F.3(a)</a>
+      and&#x00A0;<a href="#x1-118004r2">F.3(b)</a>.
+      The Source class state machine is shown in Figure&#x00A0;<a href="#x1-118003r1">F.3(a)</a>
       where an initialisation operation is executed to put the class into a known state followed by an
       operation to start passing data to the Sobel Filter class. These are linked to transitions within the
       state machine with not triggers, resulting in them being executed once the class is instantiated as
-      an object within the application. Figure&#x00A0;<a href="#x1-118004r2">B.3(b)</a> shows the state machine associated with the
+      an object within the application. Figure&#x00A0;<a href="#x1-118004r2">F.3(b)</a> shows the state machine associated with the
       Sobel Filter class. This differs from the Source state machine in that initially the class
       transitions to &#8217;State&#8217; and then waits for a trigger before taking a transition back to the
       same state. This is used allow a continuous flow of information to be passed to the
@@ -259,7 +645,7 @@
 	    </table>
 	  </div>
 	  <div class="caption">
-	    <span class="id">Figure&#x00A0;B.3: </span>
+	    <span class="id">Figure&#x00A0;F.3: </span>
 	    <span class="content">State machines defining behaviour of Classes within the UML model used for
 	      full tool chain example.</span>
 	  </div>
@@ -267,7 +653,7 @@
     </p>
 
     <h3 class="sectionHead">
-      <span class="titlemark">B.2   </span>
+      <span class="titlemark">F.2   </span>
       UML Notation
     </h3>
 
@@ -276,13 +662,13 @@
     </p>
 
     <p class="indent" >
-      As seen in Figure&#x00A0;<a href="#x1-1180022">B.2</a> above the part within TOP named i1 which is typed as Sob
+      As seen in Figure&#x00A0;<a href="#x1-1180022">F.2</a> above the part within TOP named i1 which is typed as Sob
       has a wildcard multiplicity, there is also an object typed as a HwProcessor within the
       HwComputingResource which is tagged with a wildcard multiplicity. This results in a UML model
       which can be modified to be executed on a base system with three or more cores. For
       ease of displaying all possibilities a four core LE1 base system was used, this results
       in 16 possible permutations of static mappings, these permutations are displayed in
-      Table&#x00A0;<a href="#x1-1190011">B.1</a>.
+      Table&#x00A0;<a href="#x1-1190011">F.1</a>.
     </p>
 
     <div class="table">
@@ -290,7 +676,7 @@
 	<a  id="x1-1190011"></a>
 	<div class="float">
 	  <div class="caption">
-	    <span class="id">Table&#x00A0;B.1: </span>
+	    <span class="id">Table&#x00A0;F.1: </span>
 	    <span class="content">
 	      Possible permutations of statically mapped UML models based on execution on
 	      a 4 core LE1 base system.</span>
@@ -461,7 +847,7 @@
     <p class="indent" >
       Finally, a statically mapped UML model is generated. Note in this example &#8217;11&#8217; is passed,
       resulting in the example shown in Figure&#x00A0;
-      <a href="#x1-1190064">B.4</a> being generated:
+      <a href="#x1-1190064">F.4</a> being generated:
 
       <div class="lstlisting" id="listing-13">
 	<span class="cmr-8">perl writeStatic.pl Sobel_roundrobin_wildcard_appl.xmi Sobel_roundrobin_wildcard.xml 11 &gt; Sobel_roundrobin_wildcard_set.xmi</span>
@@ -475,7 +861,7 @@
 	  <img src="img/full_flow_11.png" alt="PIC" class="graphics" width="361.34999pt" height="154.05232pt" >
 	  <br />
 	  <div class="caption" >
-	    <span class="id">Figure&#x00A0;B.4: </span>
+	    <span class="id">Figure&#x00A0;F.4: </span>
 	    <span class="content">Mapping example generated by the alloc script</span>
 	  </div>
 	</p>
@@ -495,7 +881,7 @@
     </p>
 
     <h3 class="sectionHead">
-      <span class="titlemark">B.3   </span>
+      <span class="titlemark">F.3   </span>
       FalconML
     </h3>
 
@@ -515,7 +901,7 @@
     </p>
 
     <h3 class="sectionHead">
-      <span class="titlemark">B.4   </span>
+      <span class="titlemark">F.4   </span>
       LE1 Tool Collection
     </h3>
 
@@ -533,7 +919,7 @@
     </p>
 
     <h3 class="sectionHead">
-      <span class="titlemark">B.5   </span>
+      <span class="titlemark">F.5   </span>
       Insizzle
     </h3>
 
@@ -552,7 +938,7 @@
       <div class="lstlisting">
 	<span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122004r1"></a></span><span class="cmtt-8">Insizzle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">(</span><span class="cmtt-8">c1e194a</span><span class="cmtt-8">)</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122005r2"></a></span><span class="cmtt-8">PID</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">17031</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122006r3"></a></span><span class="cmtt-8">(</span><span class="cmtt-8">send</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">SIGUSR1</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">signal</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">to</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">produce</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">state</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">dump</span><span class="cmtt-8">)</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122007r4"></a></span><span class="cmtt-8">homogeneous</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122008r5"></a></span><span class="cmtt-8">Galaxy</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">setup</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">completed</span><span class="cmtt-8">.</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122009r6"></a></span><span class="cmtt-8">Please</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">specify</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">location</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">dram</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binary</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">for</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122010r7"></a></span><span class="cmtt-8">&#x003E;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">file</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">dram</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122011r8"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">dram</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">x845e4</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122012r9"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">required</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">67107840</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">bytes</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122013r10"></a></span><span class="cmtt-8">LOADING</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">BINARY</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122014r11"></a></span><span class="cmtt-8">Please</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">specify</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">location</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">iram</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binary</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">for</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0,</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122015r12"></a></span><span class="cmtt-8">&#x003E;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">file</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122016r13"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">xecb8</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122017r14"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">required</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">262144</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">bytes</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122018r15"></a></span><span class="cmtt-8">LOADING</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">BINARY</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122019r16"></a></span><span class="cmtt-8">Please</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">specify</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">location</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">iram</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binary</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">for</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0,</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122020r17"></a></span><span class="cmtt-8">&#x003E;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">file</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122021r18"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">xecb8</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122022r19"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">required</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">262144</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">bytes</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122023r20"></a></span><span class="cmtt-8">LOADING</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">BINARY</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122024r21"></a></span><span class="cmtt-8">Please</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">specify</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">location</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">iram</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binary</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">for</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0,</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">2</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122025r22"></a></span><span class="cmtt-8">&#x003E;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">file</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122026r23"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">xecb8</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122027r24"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">required</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">262144</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">bytes</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122028r25"></a></span><span class="cmtt-8">LOADING</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">BINARY</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122029r26"></a></span><span class="cmtt-8">Please</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">specify</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">location</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">the</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">iram</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binary</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">for</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0,</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">3</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122030r27"></a></span><span class="cmtt-8">&#x003E;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">file</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122031r28"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">binaries</span><span class="cmtt-8">/</span><span class="cmtt-8">iram0</span><span class="cmtt-8">.</span><span class="cmtt-8">bin</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">xecb8</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122032r29"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">required</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">is</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">262144</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">bytes</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122033r30"></a></span><span class="cmtt-8">LOADING</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">BINARY</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122034r31"></a></span><span class="cmtt-8">Using</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Stack</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Size</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">/</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">hypercontext</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">of</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">256</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">KiB</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122035r32"></a></span><span class="cmtt-8">start</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">5005</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122036r33"></a></span><span class="cmtt-8">done</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1192857</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122037r34"></a></span><span class="cmtt-8">HALT</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">operation</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">received</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">from</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0][2][0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">at</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1193186</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122038r35"></a></span><span class="cmtt-8">HALT</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">operation</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">received</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">from</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0][0][0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">at</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1193846</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122039r36"></a></span><span class="cmtt-8">HALT</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">operation</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">received</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">from</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0][3][0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">at</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1194340</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122040r37"></a></span><span class="cmtt-8">HALT</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">operation</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">received</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">from</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0][1][0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">at</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1194898</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122041r38"></a></span><span class="cmtt-8">Start</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Time</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1355935756</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122042r39"></a></span><span class="cmtt-8">End</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Time</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1355935758</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122043r40"></a></span><span class="cmtt-8">Total</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Time</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">2</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">(</span><span class="cmtt-8">seconds</span><span class="cmtt-8">)</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122044r41"></a></span><span class="cmtt-8">performance</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">statistics</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122045r42"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">galaxy</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122046r43"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122047r44"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122048r45"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">hypercontext</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122049r46"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">breakdown</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122050r47"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1193847</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122051r48"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">stallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">429751</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122052r49"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">nopCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">235835</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122053r50"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">idleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122054r51"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">429751</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122055r52"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[1]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">571430</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122056r53"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[2]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">81076</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122057r54"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[3]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">40586</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122058r55"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[4]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">10764</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122059r56"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">decodeStallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">42547</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122060r57"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">5485</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122061r58"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchNotTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">48699</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122062r59"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">controlFlowChange</span><span class="cmtt-8">:129068</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122063r60"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">memoryAccessCount</span><span class="cmtt-8">:31787</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122064r61"></a></span><span class="cmtt-8">performance</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">statistics</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122065r62"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">galaxy</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122066r63"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122067r64"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122068r65"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">hypercontext</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122069r66"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">breakdown</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122070r67"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1194899</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122071r68"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">stallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">319013</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122072r69"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">nopCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">246914</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122073r70"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">idleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122074r71"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">319013</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122075r72"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[1]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">491020</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122076r73"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[2]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">288829</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122077r74"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[3]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">19274</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122078r75"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[4]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">5449</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122079r76"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">decodeStallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">119729</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122080r77"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">14002</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122081r78"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchNotTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">5213</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122082r79"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">controlFlowChange</span><span class="cmtt-8">:66428</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122083r80"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">memoryAccessCount</span><span class="cmtt-8">:37891</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122084r81"></a></span><span class="cmtt-8">performance</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">statistics</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122085r82"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">galaxy</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122086r83"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122087r84"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">2</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122088r85"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">hypercontext</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122089r86"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">breakdown</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122090r87"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1193187</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122091r88"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">stallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">332141</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122092r89"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">nopCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">254575</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122093r90"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">idleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122094r91"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">332141</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122095r92"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[1]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">523382</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122096r93"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[2]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">184318</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122097r94"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[3]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">36710</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122098r95"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[4]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">29267</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122099r96"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">decodeStallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">96878</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122100r97"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">10502</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122101r98"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchNotTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">27922</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122102r99"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">controlFlowChange</span><span class="cmtt-8">:78421</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122103r100"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">memoryAccessCount</span><span class="cmtt-8">:46843</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122104r101"></a></span><span class="cmtt-8">performance</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">statistics</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122105r102"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">galaxy</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122106r103"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">system</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122107r104"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">context</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">3</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122108r105"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">hypercontext</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122109r106"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">Cycle</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">breakdown</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122110r107"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">cycleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">1194341</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122111r108"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">stallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">329992</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122112r109"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">nopCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">251704</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122113r110"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">idleCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">0</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122114r111"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[0]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">329992</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122115r112"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[1]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">519368</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122116r113"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[2]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">182639</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122117r114"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[3]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">36112</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122118r115"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">[4]</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">=</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">28347</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122119r116"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">decodeStallCount</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">95407</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122120r117"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">10448</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122121r118"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">branchNotTaken</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">28249</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122122r119"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">controlFlowChange</span><span class="cmtt-8">:78195</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122123r120"></a></span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">memoryAccessCount</span><span class="cmtt-8">:52970</span><span class="cmtt-8">&#x00A0;</span><br /><span class="label"><a  id="x1-122124r121"></a></span><span class="cmtt-8">filename</span><span class="cmtt-8">:</span><span class="cmtt-8">&#x00A0;</span><span class="cmtt-8">memoryDump_0</span><span class="cmtt-8">.</span><span class="cmtt-8">dat</span><br />
 	<div class="caption" >
-	  <span class="id">Listing&#x00A0;B.1:</span>
+	  <span class="id">Listing&#x00A0;F.1:</span>
 	  <span class="content">Insizzle
 	    simulation
 	    output</span>
@@ -574,389 +960,6 @@
       <hr />
     </p>
 
-    <h2 class="appendixHead">
-      <span class="titlemark">Appendix C</span>
-      <br />
-      LE1 XML Config File
-    </h2>
-    LE1 XML Configuration File.
-    <br class="newline" />
-    XML file for configuring hardware and software sections of the LE1 tool collection.
-
-    <h3 class="sectionHead">
-      <a href="https://github.com/davestevens/LE1XML/blob/master/LE1.xml" target="_blank">
-	<span class="titlemark">Download</span>
-      </a>
-    </h3>
-
-    <p class="noindent" >
-      <a href="https://github.com/davestevens/LE1XML/blob/master/LE1.xml" target="_blank">
-      <span class="cmbx-10">LE1.xml</span>
-      </a>
-      <br class="newline" />
-      Two context, homogeneous LE1 system.
-    </p>
-
-    <h3 class="sectionHead">
-      <a href="https://github.com/davestevens/LE1XML/archive/master.zip" target="_blank">
-	<p class="titlemark">Download .zip</p>
-      </a>
-      <a href="https://github.com/davestevens/LE1XML" target="_blank">
-	<p class="titlemark">View on github.com</p>
-      </a>
-    </h3>
-
-    <p>
-      <hr />
-    </p>
-
-    <h2 class="appendixHead">
-      <span class="titlemark">Appendix D</span>
-      <br />
-      LE1 Assembler
-    </h2>
-
-    <p class="noindent" >
-      The LE1 Assembler used to translate the assembly output from VEX to match the LE1 ISA.
-      It is formed of a selection of scripts and library code to perform this translation and produce LE1 machine code from running a single script.
-
-      An diagram of LE1 Assembler scripts is shown in Figure <a href="#x1-1210011">D.1</a>.
-    </p>
-
-    <h3 class="sectionHead">
-      <a href="https://github.com/davestevens/LE1/archive/master.zip" target="_blank">
-	<p class="titlemark">Download .zip</p>
-      </a>
-      <a href="https://github.com/davestevens/LE1/tree/master/Assembler" target="_blank">
-	<p class="titlemark">View on github.com</p>
-      </a>
-    </h3>
-
-    <p class="indent" >
-      <a id="x1-1210011"></a>
-      <div class="figure" >
-	<p class="noindent" >
-	  <img src="img/le1_orch.png" alt="PIC">
-	  <br />
-	  <div class="caption">
-	    <span class="id">Figure D.1: </span>
-	    <span class="content">LE1 Assembler scripts orchestration.</span>
-	  </div>
-	</p>
-      </div>
-    </p>
-
-    <p>
-      <hr />
-    </p>
-
-    <h2 class="appendixHead">
-      <span class="titlemark">Appendix E</span>
-      <br />
-      Insizzle
-    </h2>
-    <p class="noindent" >
-      Insizzle is the LE1 VLIW CMP interpreted instruction set simulator.
-      Insizzle provides cycle accurate simulation of the LE1 hardware implementation.
-    </p>
-
-    <p class="noindent" >
-      There are two modes of simulation which match the different experiment executions performed throughout the thesis:
-    </p>
-    <p class="noindent" >
-      A) PThread mode: A single context begins execution, all other are able to have threads created on them.
-      <br/>
-      B) CPUID mode: All contexts in the system begin execution from entry point of the application.
-    </p>
-
-    <p class="noindent" >
-      The argument list for Insizzle are shown in Table <a href="#x1-1220011">E.1</a> and the heuristics produced after successful execution are explained in Table <a href="#x1-1220012">E.2</a>.
-    </p>
-
-    <h3 class="sectionHead">
-      <a href="https://github.com/davestevens/LE1/archive/master.zip" target="_blank">
-	<p class="titlemark">Download .zip</p>
-      </a>
-      <a href="https://github.com/davestevens/LE1/tree/master/Insizzle" target="_blank">
-	<p class="titlemark">View on github.com</p>
-      </a>
-    </h3>
-
-    <div class="table">
-      <p class="indent" >
-	<a  id="x1-1220011"></a>
-	<div class="float">
-	  <div class="caption">
-	    <span class="id">Table&#x00A0;E.1: </span>
-	    <span class="content">
-	      Insizzle arguments for LE1 Instruction Set Simulator.
-	    </span>
-	  </div>
-
-	  <div class="tabular">
-	    <table>
-	      <thead>
-		<tr>
-		  <th>Argument</th>
-		  <th>Description</th>
-		  <th>Required</th>
-		</tr>
-	      </thead>
-	      <tbody>
-		<tr>
-		  <td>model.xml</td>
-		  <td>LE1 XML configuration file</td>
-		  <td>True</td>
-		</tr>
-		<tr>
-		  <td>-similarIRAM</td>
-		  <td>In a multi-context system all instruction RAMS are filled with iram0.bin</td>
-		  <td>False</td>
-		</tr>
-		<tr>
-		  <td>-stack=%d</td>
-		  <td>During execution there may be stack size warnings, it is possible to set the stack sizes at command line lever rather than editing the machine model</td>
-		  <td>False</td>
-		</tr>
-		<tr>
-		  <td>-printout</td>
-		  <td>Displays all instructions being executed along with inputs and outputs (Produces a lot of data)</td>
-		  <td>False</td>
-		</tr>
-	      </tbody>
-	    </table>
-	  </div>
-	</div>
-      </p>
-    </div>
-
-    <div class="table">
-      <p class="indent" >
-	<a id="x1-1220012"></a>
-	<div class="float">
-	  <div class="caption">
-	    <span class="id">Table&#x00A0;E.2: </span>
-	    <span class="content">
-	      Description of heuristics from Insizzle Execution.
-	    </span>
-	  </div>
-
-	  <div class="tabular">
-	    <table>
-	      <thead>
-		<tr>
-		  <th>Name</th>
-		  <th>Description</th>
-		</tr>
-	      </thead>
-	      <tbody>
-		<tr>
-		  <td>Start Time</td>
-		  <td>Timestamp of when Insizzle began execution</td>
-		</tr>
-		<tr>
-		  <td>End Time</td>
-		  <td>Timestamp of when Insizzle completed execution</td>
-		</tr>
-		<tr>
-		  <td>Total Time</td>
-		  <td>Time in seconds taken for Insizzle to complete execution on host machine</td>
-		</tr>
-		<tr>
-		  <td colspan="2">Per Hypercontext</td>
-		</tr>
-		<tr>
-		  <td>cycleCount</td>
-		  <td>Total number of cycles since 0 before HALT operation was executed</td>
-		</tr>
-		<tr>
-		  <td>stallCount</td>
-		  <td>Number of cycles where the hypercontext was stalled due to pipe refills, memory access, etc.</td>
-		</tr>
-		<tr>
-		  <td>nopCount</td>
-		  <td>Number of No-Ops executed</td>
-		</tr>
-		<tr>
-		  <td>idleCount</td>
-		  <td>In pthread mode the number of cycles waiting on other hypercontext (pthread_join)</td>
-		</tr>
-		<tr>
-		  <td>bundleCount[ARRAY]</td>
-		  <td>Total cycle count broken down into bundle counts</td>
-		</tr>
-		<tr>
-		  <td>decodeStallCount</td>
-		  <td>Number of cycles stalled due to instruction decoding stalls</td>
-		</tr>
-		<tr>
-		  <td>branchTaken</td>
-		  <td>Number of branches taken</td>
-		</tr>
-		<tr>
-		  <td>branchNotTaken</td>
-		  <td>Number of branches not taken</td>
-		</tr>
-		<tr>
-		  <td>controlFlowChange</td>
-		  <td>Number of times control flow was altered due to call, branch, goto</td>
-		</tr>
-		<tr>
-		  <td>memoryAccessCount</td>
-		  <td>Number of cycles stalled due to memory conflicts</td>
-		</tr>
-	      </tbody>
-	    </table>
-	  </div>
-	</div>
-      </p>
-    </div>
-
-    <p>
-      <hr />
-    </p>
-
-    <h2 class="appendixHead">
-      <span class="titlemark">Appendix F</span>
-      <br />
-      LE1 API available within Microblaze
-    </h2>
-    The set_cpu() function sets the control registers within the LE1 to match those defined in &#8217;current&#8217;. &#8217;current&#8217; is a structure containing
-
-    <div class="lstlisting" id="listing-10"><span class="label"><a id="x1-118001r1"></a></span><span class="cmr-8">typedef</span><span class="cmr-8"> </span><span class="cmr-8">struct</span><span class="cmr-8"> </span><span class="cmsy-8">{</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118002r2"></a></span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">sys</span><span class="cmr-8">;</span><span class="cmr-8"> </span><span class="cmr-8">/</span><span class="cmsy-8">*</span><span class="cmr-8"> </span><span class="cmr-8">system</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">/</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118003r3"></a></span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">c</span><span class="cmr-8">;</span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">/</span><span class="cmsy-8">*</span><span class="cmr-8"> </span><span class="cmr-8">context</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">/</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118004r4"></a></span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">hc</span><span class="cmr-8">;</span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">/</span><span class="cmsy-8">*</span><span class="cmr-8"> </span><span class="cmr-8">hypercontext</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">/</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118005r5"></a></span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">cl</span><span class="cmr-8">;</span><span class="cmr-8"> </span><span class="cmr-8"> </span><span class="cmr-8">/</span><span class="cmsy-8">*</span><span class="cmr-8"> </span><span class="cmr-8">cluster</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">/</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118006r6"></a></span><span class="cmsy-8">}</span><span class="cmr-8"> </span><span class="cmr-8">currentT</span><span class="cmr-8">;</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118007r7"></a></span><span class="cmr-8">currentT</span><span class="cmr-8"> </span><span class="cmr-8">current</span><span class="cmr-8">;</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118008r8"></a></span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118009r9"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118010r10"></a></span><span class="cmr-8">set</span><span class="cmr-8">_cpu</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">currentT</span><span class="cmr-8"> </span><span class="cmr-8">current</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-
-    </div>
-    <p class="indent" >
-      The ctrl_wait() function polls the CTRL_REG within the current LE1, as specified through the set_cpu() function. A do while loop polls the CTRL_REG and prints each time 1M loops have been performed. (NB: This figure does not give the number of LE1 cycles executed).
-      <div class="lstlisting" id="listing-11"><span class="label"><a id="x1-118011r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118012r2"></a></span><span class="cmr-8">ctrl</span><span class="cmr-8">_wait</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">void</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      The load_iram() function takes &#8217;inst_length&#8217; bytes as pointed to by &#8217;instructions&#8217; and
-      populates the LE1 instruction RAM. &#8217;context_id&#8217; is used set the current LE1 being targeted using
-      the set_cpu() function. Instructions are written to the LE1, read back and checked for consistency.
-      If read instruction differs from written instruction an error is printed and the program exits.
-      <div class="lstlisting" id="listing-12"><span class="label"><a id="x1-118013r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118014r2"></a></span><span class="cmr-8">load</span><span class="cmr-8">_iram</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">char</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">instructions</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">inst</span><span class="cmr-8">_length</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">context</span><span class="cmr-8">_id</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      The load_dram() function takes &#8217;data_length&#8217; bytes as pointed to by &#8217;data&#8217; and populates
-      the LE1 data RAM. Data items are written to the LE1, read back and checked for
-      consistency. If read data item differs from written instruction an error is printed and the
-      program exits. If &#8217;MEMCHECK&#8217; is specified at compile time the LE1 data RAM not
-      initialised is zeroed out, this is for means of performing a comparison after execution.
-      <div class="lstlisting" id="listing-13"><span class="label"><a  id="x1-118015r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118016r2"></a></span><span class="cmr-8">load</span><span class="cmr-8">_dram</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">char</span><span class="cmr-8"> </span><span class="cmsy-8">*</span><span class="cmr-8">data</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">data</span><span class="cmr-8">_length</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-      </p>
-
-    <p class="indent" >
-      The run_application() function initialises the stack pointer with in the current LE1 specified by
-      &#8217;context_id&#8217; and writes to a control register to start the LE1 executing instructions from the
-      instruction RAM. The stack pointer is calculated using: ((&#8217;mem_top&#8217; - 0x100) - (&#8217;stack_size&#8217; *
-      &#8217;context_id&#8217;)). Where &#8217;mem_top&#8217; is the size of the data RAM within the LE1 and &#8217;stack_size&#8217; is
-      the number of bytes allocated for each contexts stack. This function starts the LE1
-      context and then calls ctrl_wait(), then returns after the LE1 has completed execution.
-
-      <div class="lstlisting" id="listing-14"><span class="label"><a  id="x1-118017r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118018r2"></a></span><span class="cmr-8">run</span><span class="cmr-8">_application</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">context</span><span class="cmr-8">_id</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">mem</span><span class="cmr-8">_top</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">stack</span><span class="cmr-8">_size</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      The get_max_context() function performs a write and then read back to all LE1 instruction
-      RAMs to compute the number of valid LE1 contexts in the current system.
-      <br class="newline" />
-      Returns the number of contexts available within the current LE1 hardware configuration.
-
-      <div class="lstlisting" id="listing-15"><span class="label"><a  id="x1-118019r1"></a></span><span class="cmr-8">int</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118020r2"></a></span><span class="cmr-8">get</span><span class="cmr-8">_max</span><span class="cmr-8">_contexts</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">void</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      The ctrl_wait_multicontext() function is similar to ctrl_wait() function except is loops from
-      zero to &#8217;max_context&#8217; until all LE1 context complete execution. <!--l. 149-->
-
-      <div class="lstlisting" id="listing-16"><span class="label"><a  id="x1-118021r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118022r2"></a></span><span class="cmr-8">ctrl</span><span class="cmr-8">_wait</span><span class="cmr-8">_multicontext</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">unsigned</span><span class="cmr-8"> </span><span class="cmr-8">max</span><span class="cmr-8">_context</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      The run_application_multicontext() function is similar to the run_application() function
-      except it starts all available LE1 contexts as specified by &#8217;max_context&#8217; and then calls the
-      ctrl_wait_multicontext() function. When all contexts have completed execution the function
-      returns.
-      <div class="lstlisting" id="listing-17"><span class="label"><a  id="x1-118023r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118024r2"></a></span><span class="cmr-8">run</span><span class="cmr-8">_application</span><span class="cmr-8">_multicontext</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">max</span><span class="cmr-8">_contexts</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">mem</span><span class="cmr-8">_top</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">stack</span><span class="cmr-8">_size</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      Available if &#8217;MEMCHECK&#8217; is specified at compile time. This function compares the LE1 data
-      RAM with an array of known correct data RAM which can be produced by the Instruction Set
-      Simulator.
-      <br class="newline" />
-      Returns 0 on completion with zero errors or -1 otherwise.
-
-      <div class="lstlisting" id="listing-18"><span class="label"><a  id="x1-118025r1"></a></span><span class="cmr-8">int</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118026r2"></a></span><span class="cmr-8">check</span><span class="cmr-8">_dram</span><span class="cmr-8">_after</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">void</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      The dbg_wr() function simply writes &#8217;wrdata&#8217; to the address specified by &#8217;addr&#8217;.
-
-      <div class="lstlisting" id="listing-19"><span class="label"><a  id="x1-118027r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118028r2"></a></span><span class="cmr-8">dbg</span><span class="cmr-8">_wr</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">addr</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">wrdata</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      The dbg_rd() function simply reads from the address specified by &#8217;addr&#8217;.
-      <br class="newline" />
-      Return the value read from the LE1 at address &#8217;addr&#8217;.
-      <div class="lstlisting" id="listing-20"><span class="label"><a  id="x1-118029r1"></a></span><span class="cmr-8">int</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118030r2"></a></span><span class="cmr-8">dbg</span><span class="cmr-8">_rd</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">addr</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      The busy_wait() function blocks until the busy register is clear. This is used after reads and
-      writes to ensure data is correct.
-
-      <div class="lstlisting" id="listing-21"><span class="label"><a  id="x1-118031r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118032r2"></a></span><span class="cmr-8">busy</span><span class="cmr-8">_wait</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">void</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      The write_special() function writes &#8217;data&#8217; to &#8221;special&#8221; registers within the LE1 space. (For
-      example; the program counter).
-      <div class="lstlisting" id="listing-22"><span class="label"><a  id="x1-118033r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118034r2"></a></span><span class="cmr-8">write</span><span class="cmr-8">_special</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">special</span><span class="cmr-8">_reg</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">data</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      The write_cr() function writes &#8217;data&#8217; to the control register specified by &#8217;ctrl_reg&#8217;.
-
-      <div class="lstlisting" id="listing-23"><span class="label"><a  id="x1-118035r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118036r2"></a></span><span class="cmr-8">write</span><span class="cmr-8">_cr</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">ctrl</span><span class="cmr-8">_reg</span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">data</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      The read_cr() function reads from control space registers specified by &#8217;ctrl_reg&#8217;.
-      <br class="newline" />
-      Return the value of the register specified by &#8217;ctrl_reg&#8217;.
-
-      <div class="lstlisting" id="listing-24"><span class="label"><a  id="x1-118037r1"></a></span><span class="cmr-8">int</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118038r2"></a></span><span class="cmr-8">read</span><span class="cmr-8">_cr</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">ctrl</span><span class="cmr-8">_reg</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p class="indent" >
-      The grp_wr() function directly writes &#8217;wrdata&#8217; to the general purpose register specified by
-      &#8217;reg&#8217;.
-      <div class="lstlisting" id="listing-25"><span class="label"><a  id="x1-118039r1"></a></span><span class="cmr-8">void</span><span class="cmr-8"> </span><br /><span class="label"><a  id="x1-118040r2"></a></span><span class="cmr-8">grp</span><span class="cmr-8">_wr</span><span class="cmr-8"> </span><span class="cmr-8">(</span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">reg</span><span class="cmr-8"> </span><span class="cmr-8">,</span><span class="cmr-8"> </span><span class="cmr-8">int</span><span class="cmr-8"> </span><span class="cmr-8">wrdata</span><span class="cmr-8">)</span><span class="cmr-8">;</span> <br />
-      </div>
-    </p>
-
-    <p>
-      <hr />
-    </p>
 
     <h2 class="appendixHead">
       <span class="titlemark">Appendix G</span>
