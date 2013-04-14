@@ -23,11 +23,11 @@
         <span class="cmr-12">Doctor of Philosophy of Loughborough University</span>
 	<br />
 	<br />
+        <span class="cmr-12">April 2013</span>
+	<br />
+	<br />
         <span class="cmsy-10x-x-120">©</span>
 	<span class="cmr-12">David Stevens 2013</span>
-	<br />
-	<br />
-        <span class="cmr-12">March 2013</span>
       </div>
     </div>
 
@@ -217,7 +217,7 @@
     </h2>
 
     <p class="noindent" >
-      The LE1 Assembler used to translate the assembly output from VEX to match the LE1 ISA.
+      The LE1 Assembler used to translate the assembly output from VEX to match the LE1 Instruction Set Architecture.
       It is formed of a selection of scripts and library code to perform this translation and produce LE1 machine code from running a single script.
 
       An diagram of LE1 Assembler scripts is shown in Figure <a href="#x1-1210011">C.1</a>.
@@ -256,7 +256,7 @@
       Insizzle
     </h2>
     <p class="noindent" >
-      Insizzle is the LE1 VLIW CMP interpreted instruction set simulator.
+      Insizzle is the LE1 VLIW CMP interpreted Instruction Set Simulator.
       Insizzle provides cycle accurate simulation of the LE1 hardware implementation.
     </p>
 
@@ -423,7 +423,7 @@
       <br />
       Modelling Modification Implementations
     </h2>
-    Methods presented in Chapter 4 which are implemented in Perl are included;
+    Methods presented in Chapter 4 used for transforming a Platform-Independent UML model to Platform-Specific UML models Implemented in Perl are included;
 
     <h3 class="sectionHead">
       <span class="titlemark">E.1</span>
@@ -434,7 +434,7 @@
       <span class="cmbx-10">arch.pl</span>
       </a>
       <br class="newline" />
-      Script to modify the Architecture section of the UML model in XMI format using the wildcard notation,
+      Script to modify the Architecture section of the UML model in XMI format using the wildcard multiplicity notation,
       <span class="cmti-10">HwProcessor</span>
       s are found and replicated.
       <br class="newline" />
@@ -481,7 +481,7 @@
       <span class="cmbx-10">alloc.pl</span>
       </a>
       <br class="newline" />
-      Script to calculate all possible static mappings based on the UML model input. Requires an XMI file, name of top level class, output file name and optionally a directory to generate images in. Generates an XML file containing permutations of all possible static mapping bases on the input UML model. Also generates an image associated with each mapping if required, this enables the viewing off generated static mappings.
+      Script to calculate all possible static mappings based on the input UML model. Requires an XMI file, name of top level class, output file name and optionally a directory to generate images in. Generates an XML file containing permutations of all possible static mapping bases on the input UML model. Also generates an image associated with each mapping if required, this enables the viewing off generated static mappings.
     </p>
 
     <h3 class="sectionHead">
@@ -493,7 +493,7 @@
       <span class="cmbx-10">writeStatic.pl</span>
       </a>
       <br class="newline" />
-      Script to generate a statically allocated UML model, using the XML output from the alloc.pl script and permutation number to generate it strips all allocations and UML dependencies and generates one of the static mappings defined in the XML file. Requires an XMI file, XML file and permutation to generate. Generates an XMI file containing the statically allocated UML model specified by the permutation number in the XML file.
+      Script to generate a statically mapped UML model, using the XML output from the alloc.pl script and permutation number to generate. It removes all mappings and UML dependencies and generates one of the static mappings defined in the XML file. Requires an XMI file, XML file and permutation to generate. Generates an XMI file containing the statically mapped, platform-specific UML model specified by the permutation number in the XML file.
     </p>
 
     <h3 class="sectionHead">
@@ -536,7 +536,7 @@
     </h3>
     <p class="noindent" >
       <a href="https://github.com/davestevens/FullFlow/blob/master/Sobel_roundrobin_wildcard.zip" target="_blank">Download Modelio UML model</a><br/>
-      Creation of UML model within Modelio using the UML design notations defined above.
+      Creation of UML model within Modelio using the UML design notations defined in Chapter 4.
       Example is based on a Sobel Filter UML model. The Class diagram showing the overall
       behaviour of the model is shown in Figure <a href="#x1-1180011">F.1</a> with the structure of the model shown in
       Figure <a href="#x1-1180022">F.2</a>. The Class diagram display internal operations, attributes and ports of the classes
@@ -585,7 +585,7 @@
       The Source class state machine is shown in Figure&#x00A0;<a href="#x1-118003r1">F.3(a)</a>
       where an initialisation operation is executed to put the class into a known state followed by an
       operation to start passing data to the Sobel Filter class. These are linked to transitions within the
-      state machine with not triggers, resulting in them being executed once the class is instantiated as
+      state machine with no triggers, resulting in them being executed once the class is instantiated as
       an object within the application. Figure&#x00A0;<a href="#x1-118004r2">F.3(b)</a> shows the state machine associated with the
       Sobel Filter class. This differs from the Source state machine in that initially the class
       transitions to &#8217;State&#8217; and then waits for a trigger before taking a transition back to the
@@ -662,7 +662,7 @@
     </p>
 
     <p class="indent" >
-      As seen in Figure&#x00A0;<a href="#x1-1180022">F.2</a> above the part within TOP named i1 which is typed as Sob
+      As seen in Figure&#x00A0;<a href="#x1-1180022">F.2</a> above the part within 'TOP' named 'i1' which is typed as 'Sob'
       has a wildcard multiplicity, there is also an object typed as a HwProcessor within the
       HwComputingResource which is tagged with a wildcard multiplicity. This results in a UML model
       which can be modified to be executed on a base system with three or more cores. For
